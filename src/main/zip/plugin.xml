@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <identifier version="9" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <description>
+    The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
+    </description>
+    <tag>Middleware/Business Intelligence/Informatica</tag>
+  </header>
+  <!-- ======================== -->
+  <!--   STEPS                  -->
+  <!-- ======================== -->
+  <step-type name="Create Static Deployment Group">
+    <description>Create a static Deployment Group and add Informatica Workflows to it.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="groupname" required="true">
+        <property-ui type="textBox" label="Informatica Group" description="The name of the static deployment group to create for deployment."/>
+      </property>
+      <property name="folder" required="true">
+        <property-ui type="textBox" label="Informatica Folder" description="The folder to create the deployment group in."/>
+      </property>
+      <property name="objectFile">
+        <property-ui type="textBox" label="Informatica File" description="Informatica-formatted file containing the object to add to the deployment group."/>
+      </property>
+      <property name="workflows">
+        <property-ui type="textAreaBox" label="Informatica Workflows" description="The names of workflows (space or line separated) to add to the depoloyment group."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_create_static_deployment.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Create Dynamic Deployment Group">
+    <description>Create a dynamic Deployment Group and populate it using a named query.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="groupname" required="true">
+        <property-ui type="textBox" label="Informatica Group" description="The name of the dynamic deployment group to create for deployment."/>
+      </property>
+      <property name="query" required="true">
+        <property-ui type="textBox" label="Dynamic Group Query" description="The name of the query to use to populate the created dynamic deployment group."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_create_dynamic_deployment.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Deploy Deployment Group">
+    <description>Deploy a deployment group from one server to another.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="srcrepo" required="true">
+        <property-ui type="textBox" label="Source Repository" description="The repository name in Informatica for the source server." default-value="${p:resource/informatica/srcrepo}"/>
+      </property>
+      <property name="srcdomain">
+        <property-ui type="textBox" label="Source Domain Name" description="The domain name of the Informatica server for the source server." default-value="${p:resource/informatica/srcdomain}"/>
+      </property>
+      <property name="srchost">
+        <property-ui type="textBox" label="Source Host" description="The host name of the Informatica server for the source server." default-value="${p:resource/informatica/srchost}"/>
+      </property>
+      <property name="srcport">
+        <property-ui type="textBox" label="Source Port" description="The port number of the Informatica server for the source server." default-value="${p:resource/informatica/srcport}"/>
+      </property>
+      <property name="srcusername" required="true">
+        <property-ui type="textBox" label="Source Username" description="The username to use to authenticate with Informatica for the source server." default-value="${p:resource/informatica/srcusername}"/>
+      </property>
+      <property name="srcpassword">
+        <property-ui type="secureBox" label="Source Password" description="The password to use to authenticate with Informatica for the source server." default-value="${p:resource/informatica/srcpassword}"/>
+      </property>
+      <property name="srcpasswordscript">
+        <property-ui type="textBox" label="Source Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here for the source server." default-value="${p:resource/informatica/srcpassscript}"/>
+      </property>
+      <property name="groupname" required="true">
+        <property-ui type="textBox" label="Informatica Group" description="The name of the deployment group to deploy."/>
+      </property>
+      <property name="folder" required="true">
+        <property-ui type="textAreaBox" label="Informatica Folder(s)" description="The folder(s) to write out to the deployment parameters file for deployment. Add each folder name on its own line."/>
+      </property>
+      <property name="label" required="false">
+        <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_deploy.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Roll Back Deployment Group">
+    <description>Roll back a deployment of a deployment group.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="groupname" required="true">
+        <property-ui type="textBox" label="Informatica Group" description="The name of the group to roll back."/>
+      </property>
+      <property name="numrevs" required="true">
+        <property-ui type="textBox" label="Number of Revisions" description="How many revisions to roll back (1 is most recent revision)."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_roll_back.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Validate Deployment Group">
+    <description>Validate a deployed deployment group in the target server.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="query" required="true">
+        <property-ui type="textBox" label="Validation Query" description="The name of the query to run to query the invalid objects of the deployment."/>
+      </property>
+      <property name="validationFile" required="true">
+        <property-ui type="textBox" label="Validation File" description="The name of the file to output validated object to."/>
+      </property>
+      <property name="validationProp" required="true">
+        <property-ui type="textBox" label="Property Name" default-value="informatica.invalid.objects" description="The property name to set on the job if the step found invalid objects. Set to 'true' if found."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_validate.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Apply Label">
+    <description>Apply a label to objects in the target server.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="label" required="true">
+        <property-ui type="textBox" label="Informatica Label" description="The name of the label to apply to the objects."/>
+      </property>
+      <property name="objectsFile" required="true">
+        <property-ui type="textBox" label="Objects File" description="The name of the file containing the objects to label."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_apply_label.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Run PMREP Command">
+    <description>Run pmrep with the commands given to pmrep defined in this step. The step will automatically add the connect and exit commands.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="infaHome">
+        <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
+      </property>
+      <property name="commands" required="true">
+        <property-ui type="textAreaBox" label="PMREP Commands" description="The commands to pass to pmrep. The connect and exit are not needed. Enter each command on a new line."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg file="launch_pmrep.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Import Objects">
+    <description>
+      Import Objects from XML files. The step will automatically add the connect and exit commands and generate the necessary control files.
+    </description>
+    <properties>
+      <property name="dirOffset">
+        <property-ui type="textBox"
+                     label="Directory Offset"
+                     description="The sub-directory of the current working directory where you want to execute this step.
+                                  Absolute paths are not allowed."/>
+      </property>
+      <property name="repo" required="true">
+        <property-ui type="textBox"
+                     label="Repository"
+                     description="The repository name in Informatica."
+                     default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox"
+                     label="Domain Name"
+                     description="The domain name of the Informatica server."
+                     default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox"
+                     label="Host"
+                     description="The host name of the Informatica server."
+                     default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox"
+                     label="Port"
+                     description="The port number of the Informatica server."
+                     default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox"
+                     label="Username"
+                     description="The username to use to authenticate with Informatica."
+                     default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox"
+                     label="Password"
+                     description="The password to use to authenticate with Informatica."
+                     default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox"
+                     label="Password Script"
+                     description="If a property or script should be used to retrieve the password,
+                                  leave it blank and put the property or script here."
+                     default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="infaHome">
+        <property-ui type="textBox"
+                     label="INFA HOME"
+                     description="The INFA_HOME variable to be set on the environment.
+                                  If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to
+                                  LD_LIBRARY_PATH and LIBPATH"/>
+      </property>
+
+      <property name="retainGenSeq">
+        <property-ui type="checkBox" label="Retain Generated Value" description="When selected, this will add the attribute 'RETAIN_GENERATED_VALUE=YES' to the IMPORTPARAMS element in the ctl files"/>
+      </property>
+
+      <property name="checkinAfterImport">
+        <property-ui type="checkBox" label="Checkin after import" description="When selected, this will add the attribute 'CHECKIN_AFTER_IMPORT=YES' to the IMPORTPARAMS element in the ctl files"/>
+      </property>
+
+      <property name="include" required="true">
+        <property-ui type="textAreaBox"
+                     label="Include Files"
+                     description="A list of XML files to include in the import. Supports * style file filters."/>
+      </property>
+      <property name="exclude">
+        <property-ui type="textAreaBox"
+                     label="Exclude Files"
+                     description="A list of XML files to exlude from the import. Supports * style file filters."/>
+      </property>
+      <property name="folderMappingList">
+        <property-ui type="textAreaBox"
+                     label="Folder Mapping"
+                     description="A new line separated list of folder mappings using [old folder]=[new folder] notation.
+                                  If no values are provided or the old folder value from the XML file does not have a
+                                  mapping the control file will use the old folder name as the new folder name."/>
+      </property>
+      <property name="repositoryMappingList">
+        <property-ui type="textAreaBox"
+                     label="Repository Mapping"
+                     description="A new line separated list of repository mappings using [old repository]=[new repository] notation.
+                                  If no values are provided or the old repository value from the XML file does not have a
+                                  mapping the control file will use the old repository name as the new repository name."/>
+      </property>
+      <property name="conflictResolutionList">
+        <property-ui type="textAreaBox"
+                     label="Conflict Resolution Rules"
+                     description="A new line separated list of conflict resolution overrides using the
+                                  [object type name]=[resolution] notation.
+                                  If no override is provided the default conflict resolution specified below will be used."/>
+      </property>
+      <property name="conflictResolutionDefault" required="true">
+        <property-ui type="textBox"
+                     label="Default Conflict Resolution"
+                     default-value="REPLACE"
+                     description="The default conflict resolution."/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp" />
+      <arg path="classes" />
+      <arg file="import_objects.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+</plugin>

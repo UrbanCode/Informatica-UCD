@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin-upgrade xmlns="http://www.urbancode.com/UpgradeXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <migrate to-version="5">
+    <migrate-command name="Import Objects">
+      <migrate-properties>
+        <migrate-property name="retainGenSeq" default="false"/>
+      </migrate-properties>
+    </migrate-command>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Validate Deployment Group"/>
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Run PMREP Command"/>
+  </migrate>
+  <migrate to-version="6">
+    <migrate-command name="Import Objects">
+      <migrate-properties>
+        <migrate-property name="checkinAfterImport" default="false"/>
+      </migrate-properties>
+    </migrate-command>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Validate Deployment Group"/>
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Run PMREP Command"/>
+  </migrate>
+  <migrate to-version="7">
+    <migrate-command name="Import Objects"/>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Validate Deployment Group"/>
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Run PMREP Command"/>
+  </migrate>
+  <migrate to-version="8">
+    <migrate-command name="Import Objects"/>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Validate Deployment Group"/>
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Run PMREP Command"/>
+  </migrate>
+  <migrate to-version="9">
+    <migrate-command name="Import Objects"/>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Validate Deployment Group"/>
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Run PMREP Command"/>
+  </migrate>
+</plugin-upgrade>
