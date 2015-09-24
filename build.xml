@@ -50,16 +50,16 @@
 
     <target name="resolve" unless="resolve.no" description="Resolve all dependencies">
         <mkdir dir="${lib.dir}"/>
-        <codestation:resolve buildLife="${env.AH_BUILD_LIFE_ID}"
-                xmlFile="dependencies.xml"/>
+        <!--<codestation:resolve buildLife="${env.AH_BUILD_LIFE_ID}"
+                xmlFile="dependencies.xml"/>-->
     </target>
 
-    <target name="publish" unless="publish.no"
+    <!--<target name="publish" unless="publish.no"
             description="Build artifacts and publish them to codestation">
         <codestation:publish project="${ahp.project.name}"
                            workflow="${ahp.workflow.name}"
                            publishall="true"/>
-    </target>
+    </target>-->
 
     <!-- =================================================== -->
     <!-- TEST TARGETS                                        -->

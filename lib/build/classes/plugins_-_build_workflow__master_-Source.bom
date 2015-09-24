@@ -1,0 +1,18 @@
+BOM version:1
+plugins - build workflow [master]
+692107
+Source
+C:\Nick\PlugIns\Informatica\lib\build\classes
+com
+com\urbancode
+com\urbancode\air
+com\urbancode\air\AirPluginTool.groovy
+com\urbancode\air\CommandHelper.groovy
+com\urbancode\air\DateParser.groovy
+com\urbancode\air\ExitCodeException.groovy
+com\urbancode\air\FileSet.groovy
+com\urbancode\air\Folder.groovy
+com\urbancode\air\GsonToObject.groovy
+com\urbancode\air\OpenX509TrustManager.groovy
+com\urbancode\air\XTrustManagerFactory.groovy
+com\urbancode\air\XTrustProvider.groovy
