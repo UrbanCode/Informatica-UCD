@@ -1,4 +1,7 @@
 import com.urbancode.air.CommandHelper
+import com.urbancode.air.plugin.informatica.TextBoxParser
+
+TextBoxParser tBox = new TextBoxParser()
 
 final def out = System.out
 final def LS = System.getProperty("line.separator")
@@ -16,7 +19,8 @@ catch (IOException e) {
 }
 
 final def groupname = stepProps['groupname']
-final def folder    = stepProps['folder'].split('\n')
+final def folder    = tBox.text2StringArray(stepProps['folder'])
+final def folderDest = tBox.text2StringArray(stepProps['folderDest'])
 final def label     = stepProps['label']
 
 final def srcrepo      = stepProps['srcrepo']
@@ -48,16 +52,22 @@ control << """<DEPLOYPARAMS
     RETAINGENERATEDVAL="YES"
     RETAINSERVERNETVALS="YES">
   <DEPLOYGROUP CLEARSRCDEPLOYGROUP="NO">"""
-folder.each() {
-    if (it) {
-        it = it.trim()
-        if (it) {
-            control << """
-            <OVERRIDEFOLDER SOURCEFOLDERNAME="$it" SOURCEFOLDERTYPE="LOCAL"
-              TARGETFOLDERNAME="$it" TARGETFOLDERTYPE="LOCAL" MODIFIEDMANUALLY="YES"/>"""
-        }
-    }
+  
+// If folderDest is empty, use source folder names as destination names
+if (!folderDest) {
+	folderDest = folder
 }
+// Fail if the array sizes are not the same
+else if (folderDest.size() != folder.size()){
+	throw new Exception ("Enter the same number folders in both Source and Destination Informatica Folder properties.")
+}
+
+for (int i = 0; i < folder.size(); i++) {
+    control << """
+    <OVERRIDEFOLDER SOURCEFOLDERNAME="${folder[i]}" SOURCEFOLDERTYPE="LOCAL"
+      TARGETFOLDERNAME="${folderDest[i]}" TARGETFOLDERTYPE="LOCAL" MODIFIEDMANUALLY="YES"/>"""
+}
+
 if (label) {
     control << """
     <APPLYLABEL SOURCELABELNAME = "$label" SOURCEMOVELABEL = "NO"

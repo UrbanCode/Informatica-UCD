@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="9" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="10" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -152,7 +152,12 @@
         <property-ui type="textBox" label="Informatica Group" description="The name of the deployment group to deploy."/>
       </property>
       <property name="folder" required="true">
-        <property-ui type="textAreaBox" label="Informatica Folder(s)" description="The folder(s) to write out to the deployment parameters file for deployment. Add each folder name on its own line."/>
+        <property-ui type="textAreaBox" label="Source Informatica Folder(s)" description="The source folder(s) of the deployment group objects. Separate each folder with a comma or new line."/>
+      </property>
+      <property name="folderDest">
+        <property-ui type="textAreaBox" label="Destination Informatica Folder(s)" description="The destination folder(s) for the deployment group objects. 
+					This is a 1:1 mapping with 'Source Informatica Folder(S)'. Separate each folder with a comma or new line. If this property is blank, the source 
+					folder names will be used as the destination folder names. "/>
       </property>
       <property name="label" required="false">
         <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group."/>
