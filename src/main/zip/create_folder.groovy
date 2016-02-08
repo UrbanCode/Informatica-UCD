@@ -59,7 +59,7 @@ for (folder in folderArray) {
     if (permissions){
         script << "-p $permissions "
     }
-    if (frozen != 0){
+    if (frozen != "0"){
         script << "-f $frozen "
     }
     script << "$LS"
