@@ -1,6 +1,3 @@
-Note: This plug-in is currently a beta release. The functionality is subject to change. This information is for planning purposes only. The information herein is subject to change or removal without notice before the products described may become available.
-Overview
-
 Overview
 
 Informatica specializes in data management and gives their users powerful methods to access this data through Informatica Power Center’s Client Tools, Repositories, and Servers.
@@ -32,14 +29,17 @@ Installation
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 History
-	Version 10 (Initial Beta Release)
-
-The following features are included in the initial beta release of the plug-in:
-    Create Static and Dynamic Deployment Groups
-    Deploy, Validate, and Roll Back Deployment Groups
-    Apply labels to objects in a target server
-
-	Version 11 (Update #1)
-
-The following features are included in the initial beta release of the plug-in:
-    Create Folder step
+	Version 9
+		The following features are included in the initial release of the plug-in:
+		Create static and dynamic deployment groups
+		Deploy, validate, and roll back deployment groups
+		Apply labels to objects in a target server
+		Import objects from XML files with necessary connect and exit commands and control files
+	Version 10
+		The following features are included in first update to Informatica plug-in:
+		Added "Destination Informatica Folder(s)" property to the Deploy Deployment Group step.
+		Renamed "Informatica Folder(s)" to "Source Informatica Folders(s)" for clarity.
+		Updated "Source Informatica Folder(s)" description to reflect these changes.
+	Version 11
+		The following feature is included in version 11 of the Informatica plug-in:
+		Implemented the PMREP command "Create Folder".
