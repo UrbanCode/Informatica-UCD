@@ -559,9 +559,9 @@
                      description="The Owner Security Domain to assign all folders."/>
       </property>
       <property name="sharedFolder">
-        <property-ui type="textBox"
-                     label="Shared Folder"
-                     description="A folder you want to share amongst all folders."/>
+        <property-ui type="checkBox"
+                     label="Share Folders"
+                     description="Make the folders shared."/>
       </property>
       <property name='frozen'>
         <property-ui type='selectBox' 

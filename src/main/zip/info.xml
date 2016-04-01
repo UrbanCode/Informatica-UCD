@@ -107,7 +107,7 @@ Informatica Data Services enables companies to directly access and merge data ac
   </meta-html>
     
   <!-- Do not change the release-version, the build process injects it. -->
-  <release-version>11</release-version>
+  <release-version>12</release-version>
     
     
   <release-notes>
@@ -154,6 +154,15 @@ Fix IMPORTPARAMS element bug.
     </release-note>
     <release-note plugin-version="9">
 Fix IMPORTPARAMS element bug.
+    </release-note>
+    <release-note plugin-version="10">
+Update
+    </release-note>
+    <release-note plugin-version="11">
+Update
+    </release-note>
+    <release-note plugin-version="12">
+Fix Create Folder step incorrectly used the -shared folder argument. 
     </release-note>
   </release-notes>
 </pluginInfo>

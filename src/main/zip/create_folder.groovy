@@ -26,7 +26,7 @@ final def folderArray = tBox.text2StringArray(stepProps['folderArray'])
 final def description = stepProps['description']
 final def owner       = stepProps['owner']
 final def ownerSecurityDomain = stepProps['ownerSecurityDomain']
-final def sharedFolder = stepProps['sharedFolder']
+final def sharedFolder = Boolean.valueOf(stepProps['sharedFolder'])
 final def permissions = stepProps['permissions']
 final def frozen      = stepProps['frozen']
 
@@ -54,7 +54,7 @@ for (folder in folderArray) {
         script << "-a $ownerSecurityDomain "
     }
     if (sharedFolder){
-        script << "-s $sharedFolder "
+        script << "-s "
     }
     if (permissions){
         script << "-p $permissions "
