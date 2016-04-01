@@ -1,3 +1,8 @@
+////////////////////////////////// NOTE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+This is not the plugin distributable! This is the source code. To find the 
+installable plugin, go into the 'dist' folder, and download informatica-dev.zip.
+/////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 Overview
 
 Informatica specializes in data management and gives their users powerful methods to access this data through Informatica Power Center’s Client Tools, Repositories, and Servers.
