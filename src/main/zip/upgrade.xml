@@ -63,10 +63,10 @@
     <migrate-command name="Create Static Deployment Group"/>
     <migrate-command name="Create Dynamic Deployment Group"/>
     <migrate-command name="Deploy Deployment Group">
-		<migrate-properties>
-			<migrate-property name="folderDest"  default="" />
-		</migrate-properties>
-	</migrate-command>
+        <migrate-properties>
+            <migrate-property name="folderDest"  default="" />
+        </migrate-properties>
+    </migrate-command>
     <migrate-command name="Roll Back Deployment Group"/>
     <migrate-command name="Validate Deployment Group"/>
     <migrate-command name="Apply Label"/>
@@ -84,6 +84,21 @@
   </migrate>
   <migrate to-version="12">
     <migrate-command name="Import Objects"/>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Validate Deployment Group"/>
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Run PMREP Command"/>
+    <migrate-command name="Create Folder"/>
+  </migrate>
+  <migrate to-version="13">
+    <migrate-command name="Import Objects">
+        <migrate-properties>
+            <migrate-property name="conflictResolutionDefault" default="REPLACE" />
+        </migrate-properties>
+    </migrate-command>
     <migrate-command name="Create Static Deployment Group"/>
     <migrate-command name="Create Dynamic Deployment Group"/>
     <migrate-command name="Deploy Deployment Group"/>

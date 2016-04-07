@@ -245,18 +245,18 @@ else {
     try {
         def procBuilder = new ProcessBuilder(command as String[])
         procBuilder.directory(workDir)
-    
+
         if (infaHome != null && infaHome != "") {
             def env = procBuilder.environment();
             env.put("INFA_HOME", infaHome);
-    
+
             if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
                 env.put("LD_LIBRARY_PATH", env.get("LD_LIBRARY_PATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
             }
             else {
                 env.put("LD_LIBRARY_PATH", infaHome + File.separator + "server" + File.separator + "bin");
             }
-    
+
             if (env.get("LIBPATH") != null && env.get("LIBPATH") != "") {
                 env.put("LIBPATH", env.get("LIBPATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
             }
@@ -268,13 +268,13 @@ else {
             println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
             println("LIBPATH : " + env.get("LIBPATH"));
         }
-    
-    
+
+
         def process = procBuilder.start();
         process.consumeProcessOutput(out, out)
         process.getOutputStream().close() // close stdin
         process.waitFor()
-    
+
         def output = new File(workDir, outputFile)
         Scanner sc = new Scanner(output)
         println('pmrep output:')
@@ -285,16 +285,21 @@ else {
         }
         println('')
         sc.close()
-    
+
         script.delete()
         output.delete()
-    
+
         if (!lastLine || !lastLine.trim().equalsIgnoreCase("exit")) {
             exitCode = 1
         }
         else {
             exitCode = process.exitValue()
         }
+    }
+    catch (Exception ex) {
+        println "[Error] Please review the output log and stack trace for information on the error."
+        println ex.printStackTrace()
+        exitCode = 1
     }
     finally {
         fileSet.keySet().each {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="12" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="13" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -155,9 +155,9 @@
         <property-ui type="textAreaBox" label="Source Informatica Folder(s)" description="The source folder(s) of the deployment group objects. Separate each folder with a comma or new line."/>
       </property>
       <property name="folderDest">
-        <property-ui type="textAreaBox" label="Destination Informatica Folder(s)" description="The destination folder(s) for the deployment group objects. 
-					This is a 1:1 mapping with 'Source Informatica Folder(S)'. Separate each folder with a comma or new line. If this property is blank, the source 
-					folder names will be used as the destination folder names. "/>
+        <property-ui type="textAreaBox" label="Destination Informatica Folder(s)" description="The destination folder(s) for the deployment group objects.
+                    This is a 1:1 mapping with 'Source Informatica Folder(S)'. Separate each folder with a comma or new line. If this property is blank, the source
+                    folder names will be used as the destination folder names. "/>
       </property>
       <property name="label" required="false">
         <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group."/>
@@ -462,10 +462,13 @@
                                   If no override is provided the default conflict resolution specified below will be used."/>
       </property>
       <property name="conflictResolutionDefault" required="true">
-        <property-ui type="textBox"
+        <property-ui type="selectBox"
                      label="Default Conflict Resolution"
                      default-value="REPLACE"
                      description="The default conflict resolution."/>
+                     <value label="REPLACE">REPLACE</value>
+                     <value label="REUSE">REUSE</value>
+                     <value label="RENAME">RENAME</value>
       </property>
     </properties>
     <post-processing><![CDATA[
@@ -536,7 +539,7 @@
         <property-ui type="textAreaBox"
                      label="Folder List"
                      description="List the names of the folders you wish to create. Separate
-					 each folder with a new line or comma. "/>
+                     each folder with a new line or comma. "/>
       </property>
       <property name="permissions">
         <property-ui type="textBox"
@@ -564,9 +567,9 @@
                      description="Make the folders shared."/>
       </property>
       <property name='frozen'>
-        <property-ui type='selectBox' 
-					 label='Frozen Setting' 
-					 description='Select the active or frozen setting from the list.' />
+        <property-ui type='selectBox'
+                     label='Frozen Setting'
+                     description='Select the active or frozen setting from the list.' />
         <value label='Default'>0</value>
         <value label='Active'>active</value>
         <value label='Frozen Deploy'>frozendeploy</value>
