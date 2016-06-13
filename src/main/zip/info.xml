@@ -107,7 +107,7 @@ Informatica Data Services enables companies to directly access and merge data ac
   </meta-html>
 
   <!-- Do not change the release-version, the build process injects it. -->
-  <release-version>13</release-version>
+  <release-version>14</release-version>
 
 
   <release-notes>
@@ -168,6 +168,9 @@ Fix Create Folder step incorrectly used the -shared folder argument.
 Import Objects Step Updates:
 - Default Conflict Resolution property is now a selectBox with RENAME, REUSE, and REPLACE options.
 - On failure, the step will now terminate correctly. The stacktrace will be printed for debugging purposes.
+    </release-note>
+    <release-note plugin-version="14">
+Added functionality for the AssignPermission pmrep command.
     </release-note>
   </release-notes>
 </pluginInfo>

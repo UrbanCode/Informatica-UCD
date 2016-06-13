@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="13" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="14" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -588,6 +588,124 @@
       <arg value="-cp" />
       <arg path="classes" />
       <arg file="create_folder.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+  <step-type name="Assign Permission">
+    <description>
+      Add, remove, or update permissions on a global object for a user, group, or the Others default group. Note: Only the administrator or the current owner of the object can manage permissions on the object.
+    </description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox"
+                     label="Repository"
+                     description="The repository name in Informatica."
+                     default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="domain">
+        <property-ui type="textBox"
+                     label="Domain Name"
+                     description="The domain name of the Informatica server."
+                     default-value="${p:resource/informatica/domain}"/>
+      </property>
+      <property name="host">
+        <property-ui type="textBox"
+                     label="Host"
+                     description="The host name of the Informatica server."
+                     default-value="${p:resource/informatica/host}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox"
+                     label="Port"
+                     description="The port number of the Informatica server."
+                     default-value="${p:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox"
+                     label="Username"
+                     description="The username to use to authenticate with Informatica."
+                     default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox"
+                     label="Password"
+                     description="The password to use to authenticate with Informatica."
+                     default-value="${p:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox"
+                     label="Password Script"
+                     description="If a property or script should be used to retrieve the password,
+                                  leave it blank and put the property or script here."
+                     default-value="${p:resource/informatica/passscript}"/>
+      </property>
+      <property name="objectType" required="true">
+        <property-ui type="selectBox"
+                     label="Object Type"
+                     default-value="folder"
+                     description="Type of the object for which you want to manage permissions."/>
+        <value label="Connection">connection</value>
+        <value label="Deployment Group">deploymentgroup</value>
+        <value label="Folder">folder</value>
+        <value label="Label">label</value>
+        <value label="Query">query</value>
+      </property>
+      <property name="objectSubtype">
+        <property-ui type="selectBox"
+                     label="Object Subtype"
+                     description="Type of Connection or Query object. Not required for other object types."/>
+        <value label="">Null</value>
+        <value label="Connection-Application">Application</value>
+        <value label="Connection-FTP">FTP</value>
+        <value label="Connection-Loader">Loader</value>
+        <value label="Connection-Queue">Queue</value>
+        <value label="Connection-Relational">Relational</value>
+        <value label="Query-Shared">Shared</value>
+        <value label="Query-Personal">Personal</value>
+      </property>
+      <property name="objectName" required="true">
+        <property-ui type="textBox"
+                     label="Object Name"
+                     description="Name of the object for which you want to manage permissions."/>
+      </property>
+      <property name="permission" required="true">
+        <property-ui type="textBox"
+                     label="Permission"
+                     description="The permission settings to assign the object. Use the characters r, w, and x to assign read, write, and execute permissions."/>
+      </property>
+      <property name="assignedUsername">
+        <property-ui type="textBox"
+                     label="User Name to assign Object"
+                     description=" Name of the user for whom you want to add, remove, or update permissions.
+                     Required if Group Name is not specified. Do not specify both."/>
+      </property>
+      <property name="assignedGroupName">
+        <property-ui type="textBox"
+                     label="Group Name to assign Object"
+                     description="Name of the group for which you want to add, remove, or update permissions.
+                     Specify 'Others' as the group name to change permissions for the Others default group.
+                     Required if assigned User Name is not specified. Do not specify both."/>
+      </property>
+      <property name="securityDomain">
+        <property-ui type="textBox"
+                     label="Security Domain"
+                     description="Required if you use LDAP authentication.
+                     Name of the security domain that the user or group belongs to. Default is Native"/>
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp" />
+      <arg path="classes" />
+      <arg file="assign_permission.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
