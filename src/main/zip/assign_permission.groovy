@@ -25,7 +25,7 @@ final def permission     = props['permission']
 // Construct the main cli call 'AssignPermission'
 def command = []
 
-command << "AssignPermision"
+command << "AssignPermission"
 
 command << "-o ${objectType}"
 
