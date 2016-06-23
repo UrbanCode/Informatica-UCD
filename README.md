@@ -11,6 +11,7 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 ### Steps:
 
     Apply Label
+    Assign Permission
     Create Dynamic Deployment Group
     Create Folder
     Create Static Deployment Group
@@ -33,6 +34,8 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+    Version 14
+        Added the Assign Permission step.
     Version 13
         Import Objects Step Updates:
         - Default Conflict Resolution property is now a selectBox with RENAME, REUSE, and REPLACE options.
