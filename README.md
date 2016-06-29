@@ -1,10 +1,10 @@
-# Informatica-UCD
+# IBM UrbanCode Deploy Informatica Plugin
 ---
 Note: This is not the plugin distributable! This is the source code. To find the installable plugin, go into the 'Releases' tab, and download a stable version.
 
 ### Overview
 
-Informatica specializes in data management and gives their users powerful methods to access this data through Informatica Power Center’s Client Tools, Repositories, and Servers.
+Informatica specializes in data management and gives their users powerful methods to access this data through Informatica Power Centerâ€™s Client Tools, Repositories, and Servers.
 
 The UCD Informatica Plugin is an automation plugin that connects to specific repositories and directly access and merge data across remote systems within your organization.
 
