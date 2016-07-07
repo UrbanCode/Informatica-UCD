@@ -43,11 +43,12 @@ final def controlFile = 'informatica_control_' + unique + '.xml'
 def control = new File(controlFile)
 // rws - leaving out attribute DEFAULTSERVERNAME="dg_sun_71099", not sure what the value should be
 control << """<DEPLOYPARAMS
-    COPYPROGRAMINFO="YES"
-    COPYMAPVARPERVALS="YES"
-    COPYWFLOWVARPERVALS="YES"
-    COPYWFLOWSESSLOGS="NO"
     COPYDEPENDENCY="YES"
+    COPYDEPLOYMENTGROUP="YES"
+    COPYMAPVARPERVALS="YES"
+    COPYPROGRAMINFO="YES"
+    COPYWFLOWSESSLOGS="NO"
+    COPYWFLOWVARPERVALS="YES"
     LATESTVERSIONONLY="YES"
     RETAINGENERATEDVAL="YES"
     RETAINSERVERNETVALS="YES">
