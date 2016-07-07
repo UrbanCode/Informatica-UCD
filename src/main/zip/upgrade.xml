@@ -119,4 +119,11 @@
     <migrate-command name="Run PMREP Command"/>
     <migrate-command name="Validate Deployment Group"/>
   </migrate>
+  <migrate to-version="15">
+    <migrate-command name="Deploy Deployment Group">
+        <migrate-properties>
+            <migrate-property name="copydeploymentgroup" />
+        </migrate-properties>
+    </migrate-command>
+  </migrate>
 </plugin-upgrade>

@@ -107,7 +107,7 @@ Informatica Data Services enables companies to directly access and merge data ac
   </meta-html>
 
   <!-- Do not change the release-version, the build process injects it. -->
-  <release-version>14.1.0</release-version>
+  <release-version>15.0.0</release-version>
 
 
   <release-notes>
@@ -171,6 +171,15 @@ Import Objects Step Updates:
     </release-note>
     <release-note plugin-version="14">
 Added functionality for the AssignPermission pmrep command.
+    </release-note>
+    <release-note plugin-version="15">
+Added the following functionality and updates:
+- Revamped the build.xml to no longer use plugin-build.xml. Now uses Apache Ivy to download dependencies.
+- Added groovy-plugin-utils-1.0.jar library.
+- Runs successfully without extra libs or jars.
+- Added the Copy Deployment Group (COPYDEPLOYMENTGROUP) pmrep control file property to Deploy Deployment Group step.
+- Removed the "launch..." scripts, added classes and groovy-plug-utils-1.0.jar to all classpaths.
+- Added EPL license.
     </release-note>
   </release-notes>
 </pluginInfo>

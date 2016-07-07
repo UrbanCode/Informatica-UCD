@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="14" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="15" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -56,7 +56,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_create_static_deployment.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="create_static_deployment.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -101,7 +103,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_create_dynamic_deployment.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="create_dynamic_deployment.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -160,7 +164,12 @@
                     folder names will be used as the destination folder names. "/>
       </property>
       <property name="label" required="false">
-        <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group."/>
+        <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group." hidden="true" />
+      </property>
+      <property name="copydeploymentgroup" required="false">
+        <property-ui type="selectBox" label="Copy Deployment Group" description="Control Parameter: Choose to copy the deployment group with the objects (in the deployment group) to the target repository." hidden="true" />
+        <value label="No [Default]">NO</value>
+        <value label="YES">YES</value>
       </property>
     </properties>
     <post-processing><![CDATA[
@@ -172,7 +181,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_deploy.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="informatica_deploy_deployment.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -217,7 +228,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_roll_back.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="informatica_roll_back_deployment.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -265,7 +278,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_validate.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="validate_deployment.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -310,7 +325,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_apply_label.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="apply_label.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -355,7 +372,9 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg file="launch_pmrep.groovy"/>
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
+      <arg file="run_pmrep.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
@@ -480,8 +499,8 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg value="-cp" />
-      <arg path="classes" />
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
       <arg file="import_objects.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
@@ -585,8 +604,8 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg value="-cp" />
-      <arg path="classes" />
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
       <arg file="create_folder.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
@@ -703,8 +722,8 @@
         }
      ]]></post-processing>
     <command program="${GROOVY_HOME}/bin/groovy">
-      <arg value="-cp" />
-      <arg path="classes" />
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
       <arg file="assign_permission.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>

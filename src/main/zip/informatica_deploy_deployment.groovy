@@ -22,6 +22,7 @@ final def groupname = stepProps['groupname']
 final def folder    = tBox.text2StringArray(stepProps['folder'])
 final def folderDest = tBox.text2StringArray(stepProps['folderDest'])
 final def label     = stepProps['label']
+final def copydeploymentgroup = stepProps['copydeploymentgroup']
 
 final def srcrepo      = stepProps['srcrepo']
 final def srcdomain    = stepProps['srcdomain']
@@ -35,7 +36,6 @@ final def tarusername  = stepProps['username']
 final def tarpassword  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript'] 
 final def tarhost      = stepProps['host']
 final def tarport      = stepProps['port']
-
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
 final def controlFile = 'informatica_control_' + unique + '.xml'
@@ -44,7 +44,7 @@ def control = new File(controlFile)
 // rws - leaving out attribute DEFAULTSERVERNAME="dg_sun_71099", not sure what the value should be
 control << """<DEPLOYPARAMS
     COPYDEPENDENCY="YES"
-    COPYDEPLOYMENTGROUP="YES"
+    COPYDEPLOYMENTGROUP="${copydeploymentgroup}"
     COPYMAPVARPERVALS="YES"
     COPYPROGRAMINFO="YES"
     COPYWFLOWSESSLOGS="NO"

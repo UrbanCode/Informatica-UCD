@@ -1,76 +1,92 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<project name="Informatica" default="all" basedir="."
-    xmlns:codestation="antlib:com.urbancode.codestation2.client">
-    
-    <property environment="env"/>
-    <property file=".build.properties"/>
-    
-    <defaultexcludes add="**/.ahs.*"/>
-    <defaultexcludes add="**/*.bom"/>
+<!--
 
-    <!-- AHP settings -->
-    <property name="ahp.branch" value="air" />
-    <property name="ahp.project.name" value="${ant.project.name}" />
-    
-    <!-- =================================================== -->
-    <!-- PROJECT STRUCTURE                                   -->
-    <!-- =================================================== -->
-    
-    <property name="lib.dir"           location="lib" />
-    
-    <!-- =================================================== -->
-    <!-- MACROS                                              -->
-    <!-- =================================================== -->
-    
-    <macrodef name="emptyDir" description="Ensure that the target directory exists and is empty">
-        <attribute name="dir"/>
-        <attribute name="excludes" default=""/>
-        <sequential>
-            <mkdir dir="@{dir}"/>
-            <delete dir="@{dir}" includes="*/**" excludes="@{excludes}" includeemptydirs="true" defaultexcludes="false"/>
-        </sequential>
-    </macrodef>
-  
-    <!-- =================================================== -->
-    <!-- TARGETS                                             -->
-    <!-- =================================================== -->
+/**
+ * © Copyright IBM Corporation 2014.  
+ * This is licensed under the following license.
+ * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+ * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp. 
+ */
 
-    <target name="dist" depends="resolve" description="Create distribution">
-        <ant antfile="plugin-build.xml" target="dist" inheritall="true"/>
-    </target>
+-->
 
-    <target name="all" depends="resolve">
-      <ant antfile="plugin-build.xml" target="all" inheritall="true"/>
-    </target>
+<project name="urbancode-deploy-newrelic-plugin" default="main" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
-    <target name="clean" description="Cleans build output">
-      <emptyDir dir="${lib.dir}" excludes="ext/**"/>
-      <ant antfile="plugin-build.xml" target="clean" inheritall="true"/>
-    </target>
+	<property name="project" value="" />
+    <property name="version" value="dev" />
+	<property name="pluginDist" value="dist/Informatica-${version}.zip" />
 
-    <target name="resolve" unless="resolve.no" description="Resolve all dependencies">
+	<property name="src.dir"     value="${basedir}/src" />
+	<property name="main.dir"    value="${src.dir}/main" />
+	<property name="groovy.dir"  value="${main.dir}/groovy" />
+	<property name="zip.dir"     value="${main.dir}/zip" />
+	<property name="build.dir"   value="${basedir}/build" />
+	<property name="lib.dir"     value="${basedir}/lib" />
+	<property name="license.dir" value="${basedir}/license" />
+    
+    <available classname="org.apache.ivy.Main" property="ivy.installed"/> 
+
+	<target name="main" depends="clean, resolve, build, dist" />
+    
+	<!-- Create the build folder -->
+	<target name="build" depends="resolve">
+
+		<!-- Copy XMLs and Groovy scripts -->
+		<copy todir="${build.dir}">
+			<fileset dir="${zip.dir}"/>
+		</copy>
+
+        <!-- Copy all classses and helpers -->
+		<mkdir dir="${build.dir}/classes"/>
+        <copy todir="${build.dir}/classes">
+            <fileset dir="${groovy.dir}" />
+        </copy>
+        
+		<!-- Copy License -->
+		<mkdir dir="${build.dir}/license"/>
+        <copy todir="${build.dir}/license">
+            <fileset dir="${license.dir}">
+                <include name="EPL.txt" />
+            </fileset>
+        </copy>
+		
+        <!-- Copy Libaries -->
+		<mkdir dir="${build.dir}/lib"/>
+        <copy todir="${build.dir}/lib">
+            <fileset dir="${lib.dir}">
+                        <exclude name="**javadoc.jar" />
+                        <exclude name="**sources.jar" />
+            </fileset>
+        </copy>
+							
+	</target>
+
+	<!-- Build the actual zip file that gets uploaded to uDeploy -->
+	<target name="dist" depends="resolve">
+		<zip destfile="${pluginDist}" basedir="${build.dir}" update="false"/>
+	</target>
+
+	<!-- Clean up the build directory -->
+	<target name="clean">
+		<delete dir="build" />
+		<mkdir dir="build" />
+		<delete file="${deployPluginArchiveName}" />
+	</target>
+
+    <target name="resolve" depends="install-ivy" unless="resolve.no" description="Resolve all dependencies">
         <mkdir dir="${lib.dir}"/>
-        <!--<codestation:resolve buildLife="${env.AH_BUILD_LIFE_ID}"
-                xmlFile="dependencies.xml"/>-->
+        <!-- Insert Apache IVY Dependencies here -->
+        <ivy:cachepath pathid="${lib.dir}">
+            <!-- http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.ibm.urbancode.plugins%22 -->
+            <dependency org="com.ibm.urbancode.plugins" name="groovy-plugin-utils" rev="1.0" transitive="false" />
+        </ivy:cachepath>
+        <ivy:retrieve />
     </target>
 
-    <!--<target name="publish" unless="publish.no"
-            description="Build artifacts and publish them to codestation">
-        <codestation:publish project="${ahp.project.name}"
-                           workflow="${ahp.workflow.name}"
-                           publishall="true"/>
-    </target>-->
-
-    <!-- =================================================== -->
-    <!-- TEST TARGETS                                        -->
-    <!-- =================================================== -->
-
-    <target name="run-tests" depends="resolve" unless="tests.no">
-      <ant antfile="plugin-build.xml" target="run-tests" inheritall="true"/>
-    </target>
-
-    <target name="run-single-test" depends="resolve" unless="tests.no">
-      <ant antfile="plugin-build.xml" target="run-single-test" inheritall="true"/>
+    <!-- Install Ivy -->
+    <target name="install-ivy" description="Install ivy" unless="ivy.installed">
+        <mkdir dir="${user.home}/.ant/lib"/>
+        <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar"/>
+        <fail message="Ivy has been installed. Run the build again"/>
     </target>
 
 </project>
