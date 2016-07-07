@@ -167,9 +167,7 @@
         <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group." hidden="true" />
       </property>
       <property name="copydeploymentgroup" required="false">
-        <property-ui type="selectBox" label="Copy Deployment Group" description="Control Parameter: Choose to copy the deployment group with the objects (in the deployment group) to the target repository." hidden="true" />
-        <value label="No [Default]">NO</value>
-        <value label="YES">YES</value>
+        <property-ui type="checkBox" label="Copy Deployment Group" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." hidden="true" />
       </property>
     </properties>
     <post-processing><![CDATA[

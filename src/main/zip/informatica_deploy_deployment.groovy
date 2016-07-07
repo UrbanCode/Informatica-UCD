@@ -22,7 +22,7 @@ final def groupname = stepProps['groupname']
 final def folder    = tBox.text2StringArray(stepProps['folder'])
 final def folderDest = tBox.text2StringArray(stepProps['folderDest'])
 final def label     = stepProps['label']
-final def copydeploymentgroup = stepProps['copydeploymentgroup']
+final def copydeploymentgroup = Boolean.valueOf(stepProps['copydeploymentgroup']) ? "YES" : "NO"
 
 final def srcrepo      = stepProps['srcrepo']
 final def srcdomain    = stepProps['srcdomain']
