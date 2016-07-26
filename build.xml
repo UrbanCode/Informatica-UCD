@@ -22,8 +22,6 @@
 	<property name="build.dir"   value="${basedir}/build" />
 	<property name="lib.dir"     value="${basedir}/lib" />
 	<property name="license.dir" value="${basedir}/license" />
-    
-    <available classname="org.apache.ivy.Main" property="ivy.installed"/> 
 
 	<target name="main" depends="clean, resolve, build, dist" />
     
@@ -53,8 +51,8 @@
 		<mkdir dir="${build.dir}/lib"/>
         <copy todir="${build.dir}/lib">
             <fileset dir="${lib.dir}">
-                        <exclude name="**javadoc.jar" />
-                        <exclude name="**sources.jar" />
+                <exclude name="**javadoc.jar" />
+                <exclude name="**sources.jar" />
             </fileset>
         </copy>
 							
@@ -83,6 +81,7 @@
     </target>
 
     <!-- Install Ivy -->
+    <available classname="org.apache.ivy.Main" property="ivy.installed"/> 
     <target name="install-ivy" description="Install ivy" unless="ivy.installed">
         <mkdir dir="${user.home}/.ant/lib"/>
         <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar"/>

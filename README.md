@@ -2,6 +2,9 @@
 ---
 Note: This is not the plugin distributable! This is the source code. To find the installable plugin, go into the 'Releases' tab, and download a stable version.
 
+### License
+This plugin is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
+
 ### Overview
 
 Informatica specializes in data management and gives their users powerful methods to access this data through Informatica Power Center’s Client Tools, Repositories, and Servers.
