@@ -107,7 +107,7 @@ Informatica Data Services enables companies to directly access and merge data ac
   </meta-html>
 
   <!-- Do not change the release-version, the build process injects it. -->
-  <release-version>15.0.0</release-version>
+  <release-version>#RELEASE_VERSION#</release-version>
 
 
   <release-notes>
@@ -180,6 +180,10 @@ Added the following functionality and updates:
 - Added the Copy Deployment Group (COPYDEPLOYMENTGROUP) pmrep control file property to Deploy Deployment Group step.
 - Removed the "launch..." scripts, added classes and groovy-plug-utils-1.0.jar to all classpaths.
 - Added EPL license.
+    </release-note>
+    <release-note plugin-version="16">
+Updated plugin-groovy-utils to v1.2.
+Updated build.xml and plugin folders structure.
     </release-note>
   </release-notes>
 </pluginInfo>

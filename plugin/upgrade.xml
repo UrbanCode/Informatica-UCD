@@ -126,4 +126,16 @@
         </migrate-properties>
     </migrate-command>
   </migrate>
+  <migrate to-version="16">
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Assign Permission"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Create Folder"/>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Import Objects"/>
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Run PMREP Command"/>
+    <migrate-command name="Validate Deployment Group"/>
+  </migrate>
 </plugin-upgrade>
