@@ -192,7 +192,7 @@
 
         <!-- Default to fail if Ivy installed, unless -DfailIvy=false : Used for .travis -->
         <target name="-fail" if="do.fail">
-            <fail message="Please run the build again.${line.separator}Note: If you get this message more than once, trying specify your Ant's home directory with the flag: ant -DantHome='ant/home/directory/here'" />
+            <fail message="Please run the build again.${line.separator}Note: If you get this message more than once, trying specify your Ant's home directory with the flag: ant -DantHome='ant/home/directory/here' or set/export the `ANT_HOME` environment variable." />
         </target>
 
         <!-- =================================================== -->
