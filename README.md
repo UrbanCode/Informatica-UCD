@@ -22,7 +22,7 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     Import Objects
     Roll Back Deployment Group
     Run PMREP Command
-    ValidateDeployment Group
+    Validate Deployment Group
 
 
 ### Compatibility
@@ -31,12 +31,23 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 
 ### Installation
 	The packaged zip is located in the dist folder. No special steps are required for installation.
-	See Installing plug-ins in UrbanCode Deploy. Download this zip file if you wish to skip the 
-	manual build step. Otherwise, download the entire Information-UCD and 
+	See Installing plug-ins in UrbanCode Deploy. Download this zip file if you wish to skip the
+	manual build step. Otherwise, download the entire Information-UCD and
 	run the "ant" command in the top level folder. This should compile the code and create
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+    Version 16
+        Updated plugin-groovy-utils to v1.2.
+        Updated build.xml and plugin folder structure.
+    Version 15
+        Added the following functionality and updates:
+        - Revamped the build.xml to no longer use plugin-build.xml. Now uses Apache Ivy to download dependencies.
+        - Added groovy-plugin-utils-1.0.jar library.
+        - Runs successfully without extra libs or jars.
+        - Added the Copy Deployment Group (COPYDEPLOYMENTGROUP) pmrep control file property to Deploy Deployment Group step.
+        - Removed the "launch..." scripts, added classes and groovy-plug-utils-1.0.jar to all classpaths.
+        - Added EPL license.
     Version 14
         Added the Assign Permission step.
     Version 13
