@@ -37,6 +37,10 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+    Version 17
+        Added security domain property to step "Import Objects" to fix authentication problem
+        Added LANG property to step "Import Objects" to fix encodeing problem
+        All default property references are now optional.
     Version 16
         Updated plugin-groovy-utils to v1.2.
         Updated build.xml and plugin folder structure.
