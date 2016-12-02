@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="16" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="17" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -429,7 +429,13 @@
                      label="Password Script"
                      description="If a property or script should be used to retrieve the password,
                                   leave it blank and put the property or script here."
-                     default-value="${p:resource/informatica/passscript}"/>
+                     default-value="${p?:resource/informatica/passscript}"/>
+      </property>
+      <property name="securityDomain">
+        <property-ui type="textBox"
+                     label="Security Domain"
+                     description="Required if you use LDAP authentication.
+                     Name of the security domain that the user or group belongs to. Default is Native"/>
       </property>
       <property name="infaHome">
         <property-ui type="textBox"
@@ -437,6 +443,13 @@
                      description="The INFA_HOME variable to be set on the environment.
                                   If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to
                                   LD_LIBRARY_PATH and LIBPATH"/>
+      </property>
+      <property name="lang">
+        <property-ui type="textBox"
+                     label="LANG"
+                     description="Set the LANG environment variable. Example values can be UTF-8, ISO-8859-1 and etc.  
+                                  If set, will override the exsiting value on the target." 
+                     default-value="UTF-8"/>
       </property>
 
       <property name="retainGenSeq">

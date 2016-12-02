@@ -24,9 +24,11 @@ final def password  = stepProps['password']
 if (!password || password.size() == 0) {
     password = stepProps['passwordscript']
 }
+final def securityDomain = stepProps['securityDomain']
 final def host      = stepProps['host']
 final def port      = stepProps['port']
 final def infaHome = stepProps['infaHome'];
+final def lang = stepProps['lang'];
 final def include = stepProps['include'];
 final def exclude = stepProps['exclude'];
 final def folderMappingList = stepProps['folderMappingList'];
@@ -106,6 +108,11 @@ else {
     // generate Informatica script
     def script = new File(workDir, inputFile)
     script << "connect -r $repo -n $username -x $password "
+
+    if (securityDomain){
+        script << "-s ${securityDomain}"
+    }
+
     if (domain) {
         script << "-d $domain $LS"
     }
@@ -246,8 +253,8 @@ else {
         def procBuilder = new ProcessBuilder(command as String[])
         procBuilder.directory(workDir)
 
+        def env = procBuilder.environment();
         if (infaHome != null && infaHome != "") {
-            def env = procBuilder.environment();
             env.put("INFA_HOME", infaHome);
 
             if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
@@ -263,11 +270,17 @@ else {
             else {
                 env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
             }
-            println("With extra  Environment : ");
-            println("INFA_HOME : " + env.get("INFA_HOME"));
-            println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
-            println("LIBPATH : " + env.get("LIBPATH"));
         }
+ 
+        if (lang != null && lang != "") {
+            env.put("LANG", lang);
+        }
+
+        println("With extra  Environment : ");
+        println("INFA_HOME : " + env.get("INFA_HOME"));
+        println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
+        println("LIBPATH : " + env.get("LIBPATH"));
+        println("LANG : " + env.get("LANG"));
 
 
         def process = procBuilder.start();
