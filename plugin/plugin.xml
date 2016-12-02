@@ -17,22 +17,22 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="domain">
-        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="groupname" required="true">
         <property-ui type="textBox" label="Informatica Group" description="The name of the static deployment group to create for deployment."/>
@@ -70,22 +70,22 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="domain">
-        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="groupname" required="true">
         <property-ui type="textBox" label="Informatica Group" description="The name of the dynamic deployment group to create for deployment."/>
@@ -117,19 +117,19 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="srcrepo" required="true">
         <property-ui type="textBox" label="Source Repository" description="The repository name in Informatica for the source server." default-value="${p:resource/informatica/srcrepo}"/>
@@ -193,22 +193,22 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="domain">
-        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="groupname" required="true">
         <property-ui type="textBox" label="Informatica Group" description="The name of the group to roll back."/>
@@ -240,22 +240,22 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="domain">
-        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="query" required="true">
         <property-ui type="textBox" label="Validation Query" description="The name of the query to run to query the invalid objects of the deployment."/>
@@ -290,22 +290,22 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="domain">
-        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="label" required="true">
         <property-ui type="textBox" label="Informatica Label" description="The name of the label to apply to the objects."/>
@@ -337,22 +337,22 @@
         <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
       </property>
       <property name="domain">
-        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p:resource/informatica/domain}"/>
+        <property-ui type="textBox" label="Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
-        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p:resource/informatica/host}"/>
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
-        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p:resource/informatica/port}"/>
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
       </property>
       <property name="password">
-        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p:resource/informatica/password}"/>
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
-        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p:resource/informatica/passscript}"/>
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="infaHome">
         <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
@@ -398,19 +398,19 @@
         <property-ui type="textBox"
                      label="Domain Name"
                      description="The domain name of the Informatica server."
-                     default-value="${p:resource/informatica/domain}"/>
+                     default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
         <property-ui type="textBox"
                      label="Host"
                      description="The host name of the Informatica server."
-                     default-value="${p:resource/informatica/host}"/>
+                     default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
         <property-ui type="textBox"
                      label="Port"
                      description="The port number of the Informatica server."
-                     default-value="${p:resource/informatica/port}"/>
+                     default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox"
@@ -422,7 +422,7 @@
         <property-ui type="secureBox"
                      label="Password"
                      description="The password to use to authenticate with Informatica."
-                     default-value="${p:resource/informatica/password}"/>
+                     default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
         <property-ui type="textBox"
@@ -447,8 +447,8 @@
       <property name="lang">
         <property-ui type="textBox"
                      label="LANG"
-                     description="Set the LANG environment variable. Example values can be UTF-8, ISO-8859-1 and etc.  
-                                  If set, will override the exsiting value on the target." 
+                     description="Set the LANG environment variable. Example values can be UTF-8, ISO-8859-1 and etc.
+                                  If set, will override the exsiting value on the target."
                      default-value="UTF-8"/>
       </property>
 
@@ -532,19 +532,19 @@
         <property-ui type="textBox"
                      label="Domain Name"
                      description="The domain name of the Informatica server."
-                     default-value="${p:resource/informatica/domain}"/>
+                     default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
         <property-ui type="textBox"
                      label="Host"
                      description="The host name of the Informatica server."
-                     default-value="${p:resource/informatica/host}"/>
+                     default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
         <property-ui type="textBox"
                      label="Port"
                      description="The port number of the Informatica server."
-                     default-value="${p:resource/informatica/port}"/>
+                     default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox"
@@ -556,14 +556,14 @@
         <property-ui type="secureBox"
                      label="Password"
                      description="The password to use to authenticate with Informatica."
-                     default-value="${p:resource/informatica/password}"/>
+                     default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
         <property-ui type="textBox"
                      label="Password Script"
                      description="If a property or script should be used to retrieve the password,
                                   leave it blank and put the property or script here."
-                     default-value="${p:resource/informatica/passscript}"/>
+                     default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="folderArray" required="true">
         <property-ui type="textAreaBox"
@@ -637,19 +637,19 @@
         <property-ui type="textBox"
                      label="Domain Name"
                      description="The domain name of the Informatica server."
-                     default-value="${p:resource/informatica/domain}"/>
+                     default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="host">
         <property-ui type="textBox"
                      label="Host"
                      description="The host name of the Informatica server."
-                     default-value="${p:resource/informatica/host}"/>
+                     default-value="${p?:resource/informatica/domain}"/>
       </property>
       <property name="port">
         <property-ui type="textBox"
                      label="Port"
                      description="The port number of the Informatica server."
-                     default-value="${p:resource/informatica/port}"/>
+                     default-value="${p?:resource/informatica/port}"/>
       </property>
       <property name="username" required="true">
         <property-ui type="textBox"
@@ -661,14 +661,14 @@
         <property-ui type="secureBox"
                      label="Password"
                      description="The password to use to authenticate with Informatica."
-                     default-value="${p:resource/informatica/password}"/>
+                     default-value="${p?:resource/informatica/password}"/>
       </property>
       <property name="passwordscript">
         <property-ui type="textBox"
                      label="Password Script"
                      description="If a property or script should be used to retrieve the password,
                                   leave it blank and put the property or script here."
-                     default-value="${p:resource/informatica/passscript}"/>
+                     default-value="${p?:resource/informatica/passscript}"/>
       </property>
       <property name="objectType" required="true">
         <property-ui type="selectBox"

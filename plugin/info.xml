@@ -186,8 +186,9 @@ Updated plugin-groovy-utils to v1.2.
 Updated build.xml and plugin folder structure.
     </release-note>
     <release-note plugin-version="17">
-         1. added security domain property to step "Import Objects" to fix authentication problem
-         2. added LANG property to step "Import Objects" to fix encodeing problem
+ Added security domain property to step "Import Objects" to fix authentication problem
+ Added LANG property to step "Import Objects" to fix encodeing problem
+ All default property references are now optional.
     </release-note>
   </release-notes>
 </pluginInfo>

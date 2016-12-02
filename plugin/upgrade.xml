@@ -147,7 +147,7 @@
     <migrate-command name="Deploy Deployment Group"/>
     <migrate-command name="Import Objects">
         <migrate-properties>
-            <migrate-property name="securityDomain" />
+            <migrate-property name="securityDomain" default=""/>
             <migrate-property name="lang" default="UTF-8" />
         </migrate-properties>
     </migrate-command>
