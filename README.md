@@ -43,7 +43,7 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
         - Now able to specify files paths for the Folder Mapping, Repository Mapping, and Conflict Resolution Rules list properties.
     Version 17
         Added security domain property to step "Import Objects" to fix authentication problem
-        Added LANG property to step "Import Objects" to fix encodeing problem
+        Added LANG property to step "Import Objects" to fix encoding problem
         All default property references are now optional.
     Version 16
         Updated plugin-groovy-utils to v1.2.
