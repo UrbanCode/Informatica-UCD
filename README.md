@@ -37,6 +37,10 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+    Version 18
+        The following updates have been made to the Import Objects step:
+        - Added a new line to prevent the Security Domain argument from bleeding into the following line.
+        - Now able to specify files paths for the Folder Mapping, Repository Mapping, and Conflict Resolution Rules list properties.
     Version 17
         Added security domain property to step "Import Objects" to fix authentication problem
         Added LANG property to step "Import Objects" to fix encodeing problem
