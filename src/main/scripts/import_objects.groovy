@@ -110,7 +110,7 @@ else {
     script << "connect -r $repo -n $username -x $password "
 
     if (securityDomain){
-        script << "-s ${securityDomain}"
+        script << "-s ${securityDomain} $LS"
     }
 
     if (domain) {
