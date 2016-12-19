@@ -155,4 +155,6 @@
     <migrate-command name="Run PMREP Command"/>
     <migrate-command name="Validate Deployment Group"/>
   </migrate>
+  <migrate to-version="18">
+  </migrate>
 </plugin-upgrade>
