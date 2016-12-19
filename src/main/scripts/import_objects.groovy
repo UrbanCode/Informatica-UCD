@@ -110,7 +110,7 @@ else {
     script << "connect -r $repo -n $username -x $password "
 
     if (securityDomain){
-        script << "-s ${securityDomain}"
+        script << "-s ${securityDomain} $LS"
     }
 
     if (domain) {
@@ -137,6 +137,11 @@ else {
     def foundErrors = false
     def repoFolderSet = [] as Set
 
+	File foldermapping = new File(folderMappingList)
+	if (foldermapping.isFile()) {
+		folderMappingList = foldermapping.text
+}
+
     folderMappingList?.split('\n')?.each {
         if (it && it.trim().length() > 0) {
             def index = it.indexOf('=')
@@ -149,6 +154,11 @@ else {
             }
         }
     }
+	File repositorymapping = new File(repositoryMappingList)
+	if (repositorymapping.isFile()) {
+		repositoryMappingList = repositorymapping.text
+}
+
     repositoryMappingList?.split('\n')?.each {
         if (it && it.trim().length() > 0) {
             def index = it.indexOf('=')
@@ -161,7 +171,10 @@ else {
             }
         }
     }
-
+	File conflictresolution = new File(conflictResolutionList)
+	if (conflictresolution.isFile()) {
+		conflictResolutionList = conflictresolution.text
+}
     conflictResolutionList?.split('\n')?.each {
         if (it && it.trim().length() > 0) {
             def index = it.indexOf('=')
