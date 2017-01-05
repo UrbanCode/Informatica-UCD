@@ -194,5 +194,8 @@ Updated build.xml and plugin folder structure.
  Fixed security domain so when input, does not bleed into next line. 
  Added functionality to allow properties files to by input into foldermapping, repositorymapping, and conflict resoultion for Import Objects step.
     </release-note>
+	<release-note plugin-version="19">
+Fixed import_object security domain lines seperation, while leaving space so that does not bleed into next variable or create new line in connection string.
+  </release-note>
   </release-notes>
 </pluginInfo>
