@@ -195,5 +195,8 @@ The following updates have been made to the Import Objects step:
 - Added a new line to prevent the Security Domain argument from bleeding into the following line.
 - Now able to specify files paths for the Folder Mapping, Repository Mapping, and Conflict Resolution Rules list properties.
     </release-note>
+	<release-note plugin-version="19">
+Fixed import_object security domain lines seperation, while leaving space so that does not bleed into next variable or create new line in connection string.
+  </release-note>
   </release-notes>
 </pluginInfo>
