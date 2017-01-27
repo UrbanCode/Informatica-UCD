@@ -189,6 +189,7 @@ else {
     }
 
     if (foundErrors) {
+		script.delete()
         System.exit 1
     }
 
@@ -294,7 +295,6 @@ else {
         println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
         println("LIBPATH : " + env.get("LIBPATH"));
         println("LANG : " + env.get("LANG"));
-
 
         def process = procBuilder.start();
         process.consumeProcessOutput(out, out)
