@@ -482,7 +482,8 @@
       <property name="folderMappingList">
         <property-ui type="textAreaBox"
                      label="Folder Mapping"
-                     description="A new line separated list of folder mappings using [old folder]=[new folder] notation.
+                     description="New line separated list of folder mappings using [old folder]=[new folder] notation.
+                                  Full file path containing the folder mapings list may be specified as an alternative.
                                   If no values are provided or the old folder value from the XML file does not have a
                                   mapping the control file will use the old folder name as the new folder name."/>
       </property>
@@ -490,6 +491,7 @@
         <property-ui type="textAreaBox"
                      label="Repository Mapping"
                      description="A new line separated list of repository mappings using [old repository]=[new repository] notation.
+                                  Full file path containing the repository mapings list may be specified as an alternative.
                                   If no values are provided or the old repository value from the XML file does not have a
                                   mapping the control file will use the old repository name as the new repository name."/>
       </property>
@@ -498,6 +500,7 @@
                      label="Conflict Resolution Rules"
                      description="A new line separated list of conflict resolution overrides using the
                                   [object type name]=[resolution] notation.
+                                  Full file path containing the conflict resolution rules list may be specified as an alternative.
                                   If no override is provided the default conflict resolution specified below will be used."/>
       </property>
       <property name="conflictResolutionDefault" required="true">

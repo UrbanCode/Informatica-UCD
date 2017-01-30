@@ -191,8 +191,9 @@ Updated build.xml and plugin folder structure.
  All default property references are now optional.
     </release-note>
 	<release-note plugin-version="18">
- Fixed security domain so when input, does not bleed into next line. 
- Added functionality to allow properties files to by input into foldermapping, repositorymapping, and conflict resoultion for Import Objects step.
+The following updates have been made to the Import Objects step:
+- Added a new line to prevent the Security Domain argument from bleeding into the following line.
+- Now able to specify files paths for the Folder Mapping, Repository Mapping, and Conflict Resolution Rules list properties.
     </release-note>
 	<release-note plugin-version="19">
 Fixed import_object security domain lines seperation, while leaving space so that does not bleed into next variable or create new line in connection string.

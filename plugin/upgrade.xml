@@ -172,7 +172,7 @@
     <migrate-command name="Validate Deployment Group">
         <migrate-properties>
             <migrate-property name="securityDomain" default=""/>
-			<migrate-property name="infaHome" default=""/>
+			      <migrate-property name="infaHome" default=""/>
             <migrate-property name="lang" default="UTF-8" />
         </migrate-properties>
     </migrate-command>	
