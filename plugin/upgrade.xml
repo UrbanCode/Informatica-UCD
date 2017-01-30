@@ -155,7 +155,11 @@
     <migrate-command name="Run PMREP Command"/>
     <migrate-command name="Validate Deployment Group"/>
   </migrate>
-   <migrate to-version="20">
+  <migrate to-version="18">
+  </migrate>
+  <migrate to-version="19">
+  </migrate>
+  <migrate to-version="20">
     <migrate-command name="Apply Label"/>
     <migrate-command name="Assign Permission"/>
     <migrate-command name="Create Dynamic Deployment Group"/>
