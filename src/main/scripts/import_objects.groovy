@@ -1,3 +1,10 @@
+/**
+ * © Copyright IBM Corporation 2015, 2017.
+ * This is licensed under the following license.
+ * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+ * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
 import java.security.MessageDigest
 
 final def out = System.out
@@ -285,7 +292,7 @@ else {
                 env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
             }
         }
- 
+
         if (lang != null && lang != "") {
             env.put("LANG", lang);
         }
@@ -311,7 +318,7 @@ else {
         }
         println('')
         sc.close()
-		
+
         output.delete()
 
         if (!lastLine || !lastLine.trim().equalsIgnoreCase("exit")) {

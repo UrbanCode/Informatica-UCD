@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ /**
+  * © Copyright IBM Corporation 2015, 2017.
+  * This is licensed under the following license.
+  * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+  * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+  */
+
+-->
 <pluginInfo>
   <!--
 
@@ -199,8 +209,8 @@ The following updates have been made to the Import Objects step:
 Fixed import_object security domain lines seperation, while leaving space so that does not bleed into next variable or create new line in connection string.
   </release-note>
   	<release-note plugin-version="20">
-Fix bug in import_objects.groovy, if invalid properties/files are detected, will delete input file which includes plaintext password.
-Added Security Domain, LANG, and INFAHOME environment to Validate Deployment group steps. 
+Fixed security vulnerability in import_objects.groovy: On exit, the generated script file will be deleted.
+Added Security Domain, LANG, and INFAHOME environment properties to the Validate Deployment Group step.
   </release-note>
   </release-notes>
 </pluginInfo>

@@ -1,3 +1,10 @@
+/**
+ * © Copyright IBM Corporation 2015, 2017.
+ * This is licensed under the following license.
+ * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+ * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
 import com.urbancode.air.CommandHelper
 import com.urbancode.air.plugin.informatica.TextBoxParser
 
@@ -27,13 +34,13 @@ final def copydeploymentgroup = Boolean.valueOf(stepProps['copydeploymentgroup']
 final def srcrepo      = stepProps['srcrepo']
 final def srcdomain    = stepProps['srcdomain']
 final def srcusername  = stepProps['srcusername']
-final def srcpassword  = stepProps['srcpassword'] ? stepProps['srcpassword'] : stepProps['srcpasswordscript'] 
+final def srcpassword  = stepProps['srcpassword'] ? stepProps['srcpassword'] : stepProps['srcpasswordscript']
 final def srchost      = stepProps['srchost']
 final def srcport      = stepProps['srcport']
 
 final def tarrepo      = stepProps['repo']
 final def tarusername  = stepProps['username']
-final def tarpassword  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript'] 
+final def tarpassword  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript']
 final def tarhost      = stepProps['host']
 final def tarport      = stepProps['port']
 final def inputFile = 'informatica_script.' + unique + '.in'
@@ -53,7 +60,7 @@ control << """<DEPLOYPARAMS
     RETAINGENERATEDVAL="YES"
     RETAINSERVERNETVALS="YES">
   <DEPLOYGROUP CLEARSRCDEPLOYGROUP="NO">"""
-  
+
 // If folderDest is empty, use source folder names as destination names
 if (!folderDest) {
 	folderDest = folder
@@ -107,7 +114,7 @@ println('')
 def command = []
 command.add('pmrep')
 command.add('run')
-command.add('-o')       
+command.add('-o')
 command.add(outputFile)
 command.add('-f')
 command.add(inputFile)

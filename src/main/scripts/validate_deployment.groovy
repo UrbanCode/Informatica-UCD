@@ -1,3 +1,10 @@
+/**
+ * © Copyright IBM Corporation 2015, 2017.
+ * This is licensed under the following license.
+ * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+ * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
 final def out = System.out
 final def LS = System.getProperty("line.separator")
 final def unique = System.currentTimeMillis()
@@ -40,7 +47,7 @@ script << "connect -r $repo -n $username -x $password "
 if (securityDomain){
     script << "-s ${securityDomain} "
 }
-	
+
 if (domain) {
     script << "-d $domain $LS"
 }
@@ -106,7 +113,7 @@ if (lang != null && lang != "") {
 	println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
 	println("LIBPATH : " + env.get("LIBPATH"));
 	println("LANG : " + env.get("LANG"));
-		
+
 def process = procBuilder.start(); command.execute()
 process.consumeProcessOutput(out, out)
 process.getOutputStream().close() // close stdin
@@ -143,10 +150,10 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
     println("Found invalid objects in the repository. Running validate on the objects.")
     println('')
     script << "connect -r $repo -n $username -x $password "
-    
+
 	if (securityDomain){
         script << "-s ${securityDomain} "
-    }	
+    }
 	if (domain) {
         script << "-d $domain $LS"
     }
@@ -154,21 +161,21 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
         script << "-h $host -o $port $LS"
     }
     script << "validate -i $queryOutputFileName -s -k -m validated_$query -p saved -u $validationOutputFileName $LS"
-    
+
     script << "exit"
     println('script content:')
     script.eachLine { line -> println(line) }
     println('')
-    
+
     println('command:')
     println(command.join(' '))
     println('')
-    
+
     process = procBuilder.start(); command.execute()
     process.consumeProcessOutput(out, out)
     process.getOutputStream().close() // close stdin
     process.waitFor()
-    
+
     sc = new Scanner(output)
     println('pmrep output:')
     lastLine = ""
@@ -178,7 +185,7 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
     }
     println('')
     sc.close()
-    
+
     script.delete()
     output.delete()
 
@@ -192,7 +199,7 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
         println("Error executing query for invalid objects.")
         System.exit(1)
     }
-    
+
 }
 else {
     println('')

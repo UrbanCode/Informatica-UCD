@@ -1,4 +1,11 @@
 /**
+ * © Copyright IBM Corporation 2015, 2017.
+ * This is licensed under the following license.
+ * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+ * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+/**
  * Purpose: The goal of this class is to minimize the repeating String manipulation
  * code written when readining in parameters. The methods here are meant to be
  * highly repeatable and easy to use. All methods assume they are being given a
