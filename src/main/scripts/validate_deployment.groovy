@@ -19,19 +19,28 @@ final def repo      = stepProps['repo']
 final def domain    = stepProps['domain']
 final def username  = stepProps['username']
 final def password  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript']
+final def securityDomain = stepProps['securityDomain']
 final def host      = stepProps['host']
 final def port      = stepProps['port']
+final def lang = stepProps['lang'];
 
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
 final def queryOutputFileName = 'informatica_script.' + unique + '.qry'
+final def infaHome = stepProps['infaHome']
 def queryOutputFile = new File(queryOutputFileName)
 def validationOutputFile = new File(validationOutputFileName)
 
 println("Running query for invalid objects: $query...")
 
+// generate Informatica script
 def script = new File(inputFile)
 script << "connect -r $repo -n $username -x $password "
+
+if (securityDomain){
+    script << "-s ${securityDomain} "
+}
+	
 if (domain) {
     script << "-d $domain $LS"
 }
@@ -45,8 +54,14 @@ println('script content:')
 script.eachLine { line -> println(line) }
 println('')
 
+//start informatica process
 def command = []
-command.add('pmrep')
+if (infaHome != null && infaHome != "") {
+    command.add(infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep");
+    }
+else {
+        command.add('pmrep')
+    }
 command.add('run')
 command.add('-o')
 command.add(outputFile)
@@ -59,7 +74,40 @@ println('command:')
 println(command.join(' '))
 println('')
 
-def process = command.execute()
+def exitCode = 0
+def procBuilder = new ProcessBuilder(command as String[])
+procBuilder.directory
+
+def env = procBuilder.environment();
+if (infaHome != null && infaHome != "") {
+	env.put("INFA_HOME", infaHome);
+
+	if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
+		env.put("LD_LIBRARY_PATH", env.get("LD_LIBRARY_PATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+	}
+	else {
+		env.put("LD_LIBRARY_PATH", infaHome + File.separator + "server" + File.separator + "bin");
+	}
+
+	if (env.get("LIBPATH") != null && env.get("LIBPATH") != "") {
+		env.put("LIBPATH", env.get("LIBPATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+	}
+	else {
+		env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
+	}
+}
+
+if (lang != null && lang != "") {
+	env.put("LANG", lang);
+}
+
+	println("With extra  Environment : ");
+	println("INFA_HOME : " + env.get("INFA_HOME"));
+	println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
+	println("LIBPATH : " + env.get("LIBPATH"));
+	println("LANG : " + env.get("LANG"));
+		
+def process = procBuilder.start(); command.execute()
 process.consumeProcessOutput(out, out)
 process.getOutputStream().close() // close stdin
 process.waitFor()
@@ -95,7 +143,11 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
     println("Found invalid objects in the repository. Running validate on the objects.")
     println('')
     script << "connect -r $repo -n $username -x $password "
-    if (domain) {
+    
+	if (securityDomain){
+        script << "-s ${securityDomain} "
+    }	
+	if (domain) {
         script << "-d $domain $LS"
     }
     else {
@@ -112,7 +164,7 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
     println(command.join(' '))
     println('')
     
-    process = command.execute()
+    process = procBuilder.start(); command.execute()
     process.consumeProcessOutput(out, out)
     process.getOutputStream().close() // close stdin
     process.waitFor()

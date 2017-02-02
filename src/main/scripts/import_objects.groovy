@@ -107,6 +107,7 @@ else {
 
     // generate Informatica script
     def script = new File(workDir, inputFile)
+	script.deleteOnExit()
     script << "connect -r $repo -n $username -x $password "
 
     if (securityDomain){
@@ -295,7 +296,6 @@ else {
         println("LIBPATH : " + env.get("LIBPATH"));
         println("LANG : " + env.get("LANG"));
 
-
         def process = procBuilder.start();
         process.consumeProcessOutput(out, out)
         process.getOutputStream().close() // close stdin
@@ -311,8 +311,7 @@ else {
         }
         println('')
         sc.close()
-
-        script.delete()
+		
         output.delete()
 
         if (!lastLine || !lastLine.trim().equalsIgnoreCase("exit")) {

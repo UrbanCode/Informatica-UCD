@@ -198,5 +198,9 @@ The following updates have been made to the Import Objects step:
 	<release-note plugin-version="19">
 Fixed import_object security domain lines seperation, while leaving space so that does not bleed into next variable or create new line in connection string.
   </release-note>
+  	<release-note plugin-version="20">
+Fix bug in import_objects.groovy, if invalid properties/files are detected, will delete input file which includes plaintext password.
+Added Security Domain, LANG, and INFAHOME environment to Validate Deployment group steps. 
+  </release-note>
   </release-notes>
 </pluginInfo>

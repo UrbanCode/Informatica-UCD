@@ -159,4 +159,22 @@
   </migrate>
   <migrate to-version="19">
   </migrate>
+  <migrate to-version="20">
+    <migrate-command name="Apply Label"/>
+    <migrate-command name="Assign Permission"/>
+    <migrate-command name="Create Dynamic Deployment Group"/>
+    <migrate-command name="Create Folder"/>
+    <migrate-command name="Create Static Deployment Group"/>
+    <migrate-command name="Deploy Deployment Group"/>
+    <migrate-command name="Import Objects/">
+    <migrate-command name="Roll Back Deployment Group"/>
+    <migrate-command name="Run PMREP Command"/>
+    <migrate-command name="Validate Deployment Group">
+        <migrate-properties>
+            <migrate-property name="securityDomain" default=""/>
+			      <migrate-property name="infaHome" default=""/>
+            <migrate-property name="lang" default="UTF-8" />
+        </migrate-properties>
+    </migrate-command>	
+  </migrate>
 </plugin-upgrade>
