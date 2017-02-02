@@ -5,6 +5,7 @@
  * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
+final def out = System.out
 final def LS = System.getProperty("line.separator")
 final def unique = System.currentTimeMillis()
 
