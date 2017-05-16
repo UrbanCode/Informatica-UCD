@@ -173,6 +173,9 @@
     <migrate-command name="Apply Label"/>
     <migrate-command name="Assign Permission"/>
     <migrate-command name="Create Dynamic Deployment Group"/>
+	<migrate-properties>
+           	<migrate-property name="infaHome" default=""/>
+        </migrate-properties>
     <migrate-command name="Create Folder"/>
     <migrate-command name="Create Static Deployment Group"/>
     <migrate-command name="Deploy Deployment Group"/>
