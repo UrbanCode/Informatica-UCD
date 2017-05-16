@@ -97,6 +97,9 @@
       <property name="passwordscript">
         <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
       </property>
+      <property name="infaHome">
+        <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
+      </property>    
       <property name="groupname" required="true">
         <property-ui type="textBox" label="Informatica Group" description="The name of the dynamic deployment group to create for deployment."/>
       </property>
