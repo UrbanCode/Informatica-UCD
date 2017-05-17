@@ -41,7 +41,7 @@ if (domain) {
 else {
     script << "-h $host -o $port $LS"
 }
-script << "rollbackdeployment -p $groupname -n $numrevs $LS"
+script << "rollbackdeployment -p $groupname -t $numrevs $LS"
 script << "exit"
 
 println('script content:')

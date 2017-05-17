@@ -194,4 +194,6 @@
           </migrate-properties>
       </migrate-command>
   </migrate>
+  <migrate to-version="22">
+  </migrate>
 </plugin-upgrade>

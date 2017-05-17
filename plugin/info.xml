@@ -215,5 +215,8 @@ Added Security Domain, LANG, and INFAHOME environment properties to the Validate
   	<release-note plugin-version="21">
 Added INFA HOME property to the Create Dynamic Deployment Group step.
   </release-note>
+  	<release-note plugin-version="22">
+The Roll Back Deployment Group Step properly uses the -t flag.
+  </release-note>
   </release-notes>
 </pluginInfo>
