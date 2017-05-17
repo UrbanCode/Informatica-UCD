@@ -28,6 +28,7 @@ final def username  = stepProps['username']
 final def password  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript']
 final def host      = stepProps['host']
 final def port      = stepProps['port']
+final def infaHome  = stepProps['infaHome']
 
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
@@ -49,7 +50,12 @@ script.eachLine { line -> println(line) }
 println('')
 
 def command = []
-command.add('pmrep')
+if (infaHome != null && infaHome != "") {
+    command.add(infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep");
+}
+else {
+    command.add('pmrep')
+}
 command.add('run')
 command.add('-o')
 command.add(outputFile)

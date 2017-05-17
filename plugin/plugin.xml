@@ -11,7 +11,7 @@
 -->
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="20" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="21" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -96,6 +96,9 @@
       </property>
       <property name="passwordscript">
         <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
+      </property>
+      <property name="infaHome">
+        <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
       </property>
       <property name="groupname" required="true">
         <property-ui type="textBox" label="Informatica Group" description="The name of the dynamic deployment group to create for deployment."/>

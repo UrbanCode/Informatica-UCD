@@ -212,5 +212,8 @@ Fixed import_object security domain lines seperation, while leaving space so tha
 Fixed security vulnerability in import_objects.groovy: On exit, the generated script file will be deleted.
 Added Security Domain, LANG, and INFAHOME environment properties to the Validate Deployment Group step.
   </release-note>
+  	<release-note plugin-version="21">
+Added INFA HOME property to the Create Dynamic Deployment Group step.
+  </release-note>
   </release-notes>
 </pluginInfo>

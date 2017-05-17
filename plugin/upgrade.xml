@@ -187,4 +187,11 @@
         </migrate-properties>
     </migrate-command>
   </migrate>
+  <migrate to-version="21">
+      <migrate-command name="Create Dynamic Deployment Group">
+          <migrate-properties>
+              <migrate-property name="infaHome" default=""/>
+          </migrate-properties>
+      </migrate-command>
+  </migrate>
 </plugin-upgrade>
