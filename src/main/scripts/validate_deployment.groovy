@@ -29,7 +29,7 @@ final def password  = stepProps['password'] ? stepProps['password'] : stepProps[
 final def securityDomain = stepProps['securityDomain']
 final def host      = stepProps['host']
 final def port      = stepProps['port']
-final def lang = stepProps['lang'];
+final def lang      = stepProps['lang'];
 
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
@@ -114,7 +114,7 @@ if (lang != null && lang != "") {
 	println("LIBPATH : " + env.get("LIBPATH"));
 	println("LANG : " + env.get("LANG"));
 
-def process = procBuilder.start(); command.execute()
+def process = procBuilder.start();
 process.consumeProcessOutput(out, out)
 process.getOutputStream().close() // close stdin
 process.waitFor()

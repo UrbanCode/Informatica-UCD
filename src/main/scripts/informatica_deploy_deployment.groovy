@@ -25,10 +25,10 @@ catch (IOException e) {
     throw new RuntimeException(e);
 }
 
-final def groupname = stepProps['groupname']
-final def folder    = tBox.text2StringArray(stepProps['folder'])
+final def groupname  = stepProps['groupname']
+final def folder     = tBox.text2StringArray(stepProps['folder'])
 final def folderDest = tBox.text2StringArray(stepProps['folderDest'])
-final def label     = stepProps['label']
+final def label      = stepProps['label']
 final def copydeploymentgroup = Boolean.valueOf(stepProps['copydeploymentgroup']) ? "YES" : "NO"
 
 final def srcrepo      = stepProps['srcrepo']
@@ -43,6 +43,7 @@ final def tarusername  = stepProps['username']
 final def tarpassword  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript']
 final def tarhost      = stepProps['host']
 final def tarport      = stepProps['port']
+final def infaHome     = stepProps['infaHome']
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
 final def controlFile = 'informatica_control_' + unique + '.xml'
@@ -112,7 +113,12 @@ script.eachLine { line -> println(line) }
 println('')
 
 def command = []
-command.add('pmrep')
+if (infaHome != null && infaHome != "") {
+    command.add(infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep");
+}
+else {
+    command.add('pmrep')
+}
 command.add('run')
 command.add('-o')
 command.add(outputFile)
@@ -125,7 +131,36 @@ println('command:')
 println(command.join(' '))
 println('')
 
-def process = command.execute()
+def exitCode = 0
+def procBuilder = new ProcessBuilder(command as String[])
+procBuilder.directory
+
+def env = procBuilder.environment();
+if (infaHome != null && infaHome != "") {
+	env.put("INFA_HOME", infaHome);
+
+	if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
+		env.put("LD_LIBRARY_PATH", env.get("LD_LIBRARY_PATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+	}
+	else {
+		env.put("LD_LIBRARY_PATH", infaHome + File.separator + "server" + File.separator + "bin");
+	}
+
+	if (env.get("LIBPATH") != null && env.get("LIBPATH") != "") {
+		env.put("LIBPATH", env.get("LIBPATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+	}
+	else {
+		env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
+	}
+}
+
+
+	println("With extra  Environment : ");
+	println("INFA_HOME : " + env.get("INFA_HOME"));
+	println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
+	println("LIBPATH : " + env.get("LIBPATH"));
+
+def process = procBuilder.start();
 process.consumeProcessOutput(out, out)
 process.getOutputStream().close() // close stdin
 process.waitFor()
