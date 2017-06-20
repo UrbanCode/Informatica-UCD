@@ -198,4 +198,12 @@
   </migrate>
   <migrate to-version="23">
   </migrate>
+  <migrate to-version="24">
+      <migrate-command name="Create Dynamic Deployment Group">
+          <migrate-properties>
+              <migrate-property name="query" default=""/>
+              <migrate-property name="type" default=""/>
+          </migrate-properties>
+      </migrate-command>
+  </migrate>
 </plugin-upgrade>

@@ -219,7 +219,10 @@ Added INFA HOME property to the Create Dynamic Deployment Group step.
 The Roll Back Deployment Group Step properly uses the -t flag.
   </release-note>
   	<release-note plugin-version="23">
-Import Objects step no longer adds Retain Generated Value and Checkin After Import parameters to control file if not selected.
+Pull Request #23 - Import Objects step no longer adds Retain Generated Value and Checkin After Import parameters to control file if not selected.
+  </release-note>
+  	<release-note plugin-version="24">
+Issue #18 - Type property added to the Create Dynamic Deployment step.
   </release-note>
   </release-notes>
 </pluginInfo>

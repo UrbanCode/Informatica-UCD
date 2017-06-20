@@ -22,6 +22,7 @@ catch (IOException e) {
 
 final def groupname = stepProps['groupname']
 final def query     = stepProps['query']
+final def type      = stepProps['type']
 final def repo      = stepProps['repo']
 final def domain    = stepProps['domain']
 final def username  = stepProps['username']
@@ -42,7 +43,7 @@ else {
     script << "-h $host -o $port $LS"
 }
 script << "executequery -q $query $LS"
-script << "createdeploymentgroup -p $groupname -t dynamic -q $query $LS"
+script << "createdeploymentgroup -p $groupname -t dynamic -q $query -u $type $LS"
 
 script << "exit"
 println('script content:')
