@@ -42,8 +42,8 @@ final def folderMappingList = stepProps['folderMappingList'];
 final def repositoryMappingList = stepProps['repositoryMappingList'];
 final def conflictResolutionList = stepProps['conflictResolutionList'];
 final def conflictResolutionDefault = stepProps['conflictResolutionDefault'];
-final def retainGenSeq = stepProps['retainGenSeq'];
-final def checkinAfterImport = stepProps['checkinAfterImport'];
+final def retainGenSeq = Boolean.valueOf(stepProps['retainGenSeq']);
+final def checkinAfterImport = Boolean.valueOf(stepProps['checkinAfterImport']);
 
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'

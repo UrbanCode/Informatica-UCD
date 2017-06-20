@@ -196,4 +196,6 @@
   </migrate>
   <migrate to-version="22">
   </migrate>
+  <migrate to-version="23">
+  </migrate>
 </plugin-upgrade>
