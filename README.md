@@ -37,6 +37,11 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+    Version 24
+        Issue #18 - Type property added to the Create Dynamic Deployment step.
+        Issue #19 - INFA HOME property added to the Deploy Deployment Group step.
+        INFA_HOME, LD_LIBRARY_PATH, and LIBPATH environment variables are set in the Create Deploy Deployment and Deploy Deployment Group steps.
+        Removed extra execute command from the Validate Deployment step.
     Version 23
         Import Objects step no longer adds Retain Generated Value and Checkin After Import parameters to control file if not selected.
     Version 22
