@@ -227,5 +227,8 @@ Issue #19 - INFA HOME property added to the Deploy Deployment Group step.
 INFA_HOME, LD_LIBRARY_PATH, and LIBPATH environment variables are set in the Create Deploy Deployment and Deploy Deployment Group steps.
 Removed extra execute command from the Validate Deployment step.
   </release-note>
+  	<release-note plugin-version="25">
+Issue #26 - Security Domain property added to Apply Label step.
+  </release-note>
   </release-notes>
 </pluginInfo>
