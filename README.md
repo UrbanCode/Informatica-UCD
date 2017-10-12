@@ -37,6 +37,8 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+    Version 25
+    Issue #26 - Security Domain property added to Apply Label step.
     Version 24
         Issue #18 - Type property added to the Create Dynamic Deployment step.
         Issue #19 - INFA HOME property added to the Deploy Deployment Group step.
