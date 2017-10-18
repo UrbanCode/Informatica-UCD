@@ -218,4 +218,32 @@
           </migrate-properties>
       </migrate-command>
   </migrate>
+  <migrate to-version="26">
+      <migrate-command name="Create Dynamic Deployment group">
+          <migrate-properties>
+              <migrate-property name="securityDomain" default=""/>
+          </migrate-properties>
+      </migrate-command>
+      <migrate-command name="Create Static Deployment group">
+          <migrate-properties>
+              <migrate-property name="securityDomain" default=""/>
+          </migrate-properties>
+      </migrate-command>
+      <migrate-command name="Deploy Deployment group">
+          <migrate-properties>
+              <migrate-property name="srcsecurityDomain" default=""/>
+              <migrate-property name="securityDomain" default=""/>
+          </migrate-properties>
+      </migrate-command>
+      <migrate-command name="Roll Back Deployment group">
+          <migrate-properties>
+              <migrate-property name="securityDomain" default=""/>
+          </migrate-properties>
+      </migrate-command>
+      <migrate-command name="Run PMREP Command">
+          <migrate-properties>
+              <migrate-property name="securityDomain" default=""/>
+          </migrate-properties>
+      </migrate-command>
+  </migrate>
 </plugin-upgrade>
