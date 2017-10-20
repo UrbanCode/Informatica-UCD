@@ -26,6 +26,7 @@ final def repo      = stepProps['repo']
 final def domain    = stepProps['domain']
 final def username  = stepProps['username']
 final def password  = stepProps['password'] ? stepProps['password'] : stepProps['passwordscript']
+final def securityDomain = stepProps['securityDomain']
 final def host      = stepProps['host']
 final def port      = stepProps['port']
 
@@ -35,6 +36,11 @@ final def outputFile = 'informatica_script.' + unique + '.out'
 def script = new File(inputFile)
 script.deleteOnExit()
 script << "connect -r $repo -n $username -x $password "
+
+if (securityDomain){
+    script << "-s ${securityDomain} "
+}
+
 if (domain) {
     script << "-d $domain $LS"
 }
