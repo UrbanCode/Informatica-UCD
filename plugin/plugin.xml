@@ -11,7 +11,7 @@
 -->
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="26" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="27" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -796,6 +796,80 @@
       <arg value="-cp"/>
       <arg path="classes:lib/groovy-plugin-utils-1.2.jar"/>
       <arg file="assign_permission.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+    <description>
+      Folder Migration. The step will Migrat folders from Source folders to Target folders and generate the necessary control files.
+    </description>
+         <properties>
+      <property name="srcrepo" required="true">
+        <property-ui type="textBox" label="Source Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="srchost">
+        <property-ui type="textBox" label="Source Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="srcport">
+        <property-ui type="textBox" label="Source Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
+      </property>
+      <property name="srcusername" required="true">
+        <property-ui type="textBox" label="Source Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="srcpassword" required="true">
+        <property-ui type="secureBox" label="Source Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
+      </property>
+       <property name="srcdomain" required="true">
+        <property-ui type="textBox" label="Source Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="srcsecurityDomain" required="true">
+        <property-ui type="textBox" label="Source Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native"/>
+      </property>
+         <property name="tarrepo" required="true">
+        <property-ui type="textBox" label="Target Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="tarhost">
+        <property-ui type="textBox" label="Target Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="tarport">
+        <property-ui type="textBox" label="Target Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
+      </property>
+      <property name="tarusername" required="true">
+        <property-ui type="textBox" label="Target Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="tarpassword" required="true">
+        <property-ui type="secureBox" label="Target Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
+      </property>
+       <property name="tardomain" required="true">
+        <property-ui type="textBox" label="Target Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="tarsecurityDomain" required="true">
+        <property-ui type="textBox" label="Target Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native"/>
+      </property>
+      <property name="infaHome" required="true">
+        <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
+      </property>
+      <property name="srcfolder" required="true">
+        <property-ui type="textAreaBox" label="Source Informatica Folder(s)" description="The source folder(s) of the deployment folders. Separate each folder with a comma or new line."/>
+      </property>
+      <property name="tarfolder">
+        <property-ui type="textAreaBox" label="Destination Informatica Folder(s)" description="The target folder(s) for the deployment folders.Separate each folder with a comma or new line. If this property is blank, the source
+                    folder names will be used as the destination folder names. "/>
+      </property>
+      </properties>
+      
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.2.jar"/>
+      <arg file="folder_migration.groovy"/>
       <arg file="${PLUGIN_INPUT_PROPS}"/>
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
