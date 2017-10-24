@@ -800,6 +800,7 @@
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
   </step-type>
+ <step-type name="Folder Migration">
     <description>
       Folder Migration. The step will Migrat folders from Source folders to Target folders and generate the necessary control files.
     </description>
