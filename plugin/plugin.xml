@@ -300,7 +300,7 @@
       <property name="securityDomain">
         <property-ui type="textBox" label="Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native"/>
       </property>
-	  <property name="infaHome">
+      <property name="infaHome">
         <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
       </property>
       <property name="lang">
@@ -858,7 +858,7 @@
                     folder names will be used as the destination folder names. "/>
       </property>
       </properties>
-      
+
     <post-processing><![CDATA[
         if (properties.get("exitCode") != 0) {
             properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
@@ -877,7 +877,7 @@
   </step-type>
    <step-type name="Validate Folder Migration">
     <description>
-      Folder Migration. The step will validate folder migration in the target server.
+      Validate Folder Migration. The step will validate folder migration in the target server.
     </description>
          <properties>
         <property name="tarrepo" required="true">
@@ -909,7 +909,7 @@
                     folder names will be used as the destination folder names. "/>
       </property>
       </properties>
-      
+
     <post-processing><![CDATA[
         if (properties.get("exitCode") != 0) {
             properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
