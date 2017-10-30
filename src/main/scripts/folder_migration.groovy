@@ -45,16 +45,9 @@ final def tarpassword  = stepProps['tarpassword']
 final def tarhost      = stepProps['tarhost']
 final def tarport      = stepProps['tarport']
 
-final def workflowOutputFile = 'informatica_workflowOutput_' + unique + '.in'
-final def workflowDependenciesFile = 'informatica_dependencies_' + unique + '.dep'
-final def invalidObjectsFile = 'informaticafile_invalidObjects_' + unique + '.invalid'
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
 
-def workflowOutput = new File(workflowOutputFile)
-def workflowDependencies = new File(workflowDependenciesFile)
-def invalidObjects = new File(invalidObjectsFile)
-def workflowList
 def controlFile = []
 def process
 
@@ -86,10 +79,10 @@ def controlStart = """<!DOCTYPE DEPLOYPARAMS SYSTEM "/u01/app/Dev/Informatica/pw
 
   for (int i = 0; i < tarfolder.size(); i++) {
 	  def filname = "${tarfolder[i]}_" + unique  + i + '.xml'
-	  	controlFile += filname
+		  controlFile += filname
 		  File control = new File(filname)
   if (!control.exists()){
-	  	control.createNewFile()
+		  control.createNewFile()
   }
 
   def controlXml = controlStart + '\n' +
@@ -118,48 +111,39 @@ def controlStart = """<!DOCTYPE DEPLOYPARAMS SYSTEM "/u01/app/Dev/Informatica/pw
 
 // script for folder deployment		
 	def script = new File(inputFile)
-
 		script << "connect -r $srcrepo -n $srcusername -x $srcpassword "
 
 	if (srcsecurityDomain) {
-
 		script << "-s $srcsecurityDomain "
 
 	}
-
 	if (srcdomain) {
-
 		script << "-d $srcdomain $LS"
 
 	} else {
-
 		script << "-h $srchost -o $srcport $LS"
 
 	}
-
 	for (int i = 0; i < srcfolder.size(); i++) {
 		script << "deployfolder -f \"${srcfolder[i]}\"  -c \"${controlFile[i]}\" -r $tarrepo -n $tarusername -x $tarpassword "
 
 	if (tarsecurityDomain) {
-
 		script << "-s $tarsecurityDomain "
 	}
-
 	if (tardomain) {
-
 		script << "-d $tardomain $LS"
 
 	} else {
-
 		script << "-h $tarhost -o $tarport $LS"
 
 		}
 
 	}
-
-  	  //println('Deploy folder script content:' + script )
-	  //script.eachLine { line -> println(line) }
-	  //println('')
+		script << "exit"
+	
+  	  println('Deploy folder script content:' + script )
+	  script.eachLine { line -> println(line) }
+	  println('')
 
 	//run the Informatica command
 	def exitCode = 0
@@ -209,8 +193,8 @@ def controlStart = """<!DOCTYPE DEPLOYPARAMS SYSTEM "/u01/app/Dev/Informatica/pw
 			process.consumeProcessOutput(out, out)
 			process.getOutputStream().close() // close stdin
 			process.waitFor()
+					
 			
-
 		def output = new File(outputFile)
 			Scanner sc = new Scanner(output)
 			println('..........pmrep Deployfolder output:...........')
@@ -220,21 +204,9 @@ def controlStart = """<!DOCTYPE DEPLOYPARAMS SYSTEM "/u01/app/Dev/Informatica/pw
 			println(lastLine)
 		}
 			println('')
+					
+			sc.close();		
 			
-			sc.close()
-		
-		
-		 so = new Scanner(output)
-		
-		def failOutList = []
-		while (so.hasNextLine()){
-			failOutList.add(so.nextLine());
-		}
-			
-		def  execution = failOutList.find{item -> 
-							item.contains('Failed to execute deployfolder')}
-	
-		
 		for (int i = 0; i < srcfolder.size(); i++) {
 			File control = new File(controlFile[i])
 		if (control.exists()){
@@ -245,183 +217,13 @@ def controlStart = """<!DOCTYPE DEPLOYPARAMS SYSTEM "/u01/app/Dev/Informatica/pw
 		
 		script.delete()
 		output.delete()
-		
-		// script for Get the list of all workflows 
-		script << "connect -r $tarrepo -n $tarusername -x $tarpassword "
-
-		if (tarsecurityDomain){
-			
-			script << "-s $tarsecurityDomain "
-		}
-		if (tardomain) {
-			
-			script << "-d $tardomain $LS"
-			
-		} else {
-		
-			script << "-h $tarhost -o $tarport $LS"
-		}
-
-		for (int i = 0; i < tarfolder.size(); i++) {
-			
-			script << "listobjects -o workflow -f \"${tarfolder[i]}\" $LS"
-
-		}
-
-//		println('list of object script content:')
-//		script.eachLine { line -> println(line) }
-//		println('')
-
 	
-		process = procBuilder.start(); command.execute()
-		process.consumeProcessOutput(out, out)
-		process.getOutputStream().close() // close stdin
-		process.waitFor()
 
-		sc = new Scanner(output)
-		//println('..........pmrep list of object output result.......:')
-		lastLine = ""
-		while (sc.hasNextLine()) {
-			lastLine = sc.nextLine()
-			//println(lastLine)
-		}
-			//println('')
-
-		Scanner sa = new Scanner(output)
-		
-		def list = []
-		
-		while (sa.hasNextLine()){
-			list.add(sa.nextLine());	
-		}
-			sa.close();
+		if (!lastLine || !lastLine.trim().equalsIgnoreCase("exit")) {
+			System.exit(1)
 			
-	// mapping the each folder as key and each workflow as values.
-			
-		def mapWorkflow = [:]	
-
-		def key = "", workflowitems = []
-
-		for (int i=0; i<list.size(); i++){
-			if(list[i].contains('workflow -f')){
-				key = list[i].substring(list[i].indexOf('workflow -f')+11,list[i].length() )
-				i++
-			}
-			while(i<list.size() && list[i].startsWith('workflow') && key.size()>0) {
-			workflowitems += list[i].minus('workflow').trim()
-			i++
-			}
-			if(key.size()>0 && workflowitems.size()>0){
-				mapWorkflow[key.trim()]=workflowitems
-				workflowitems =[]
-				key=""
-			}
-
-		}
-
-		
-		//validate each workflow with in the  each folder 
-		
-   if (mapWorkflow != null && mapWorkflow.size()>0){
-			   
-		 	for (int i = 0; i < tarfolder.size(); i++) {
-				 	def workflowItemList = mapWorkflow.get("\""+tarfolder[i]+"\"")
-					 workflowItemList.each{
- 
-				script <<  "validate -n ${it} -o workflow -f \"${tarfolder[i]}\" -p valid,invalid_after -u $workflowOutput -a  $LS" 
-			
-					 }
-
-		 	}
-				script << "listobjectdependencies -i $workflowOutput -s -p both -u $workflowDependencies -a  $LS"
-
-			if (workflowDependencies){
-
-				script << "validate -i $workflowDependencies -s -k -m validated -p invalid_after  -u $invalidObjects -a $LS"
-			
-			}
-				script << "exit"
-
-//			println('script content-----------:')
-//			script.eachLine { line -> println(line) }
-//		    println('')
-			
-			
-		try{
-
-			process = procBuilder.start(); command.execute()
-			process.consumeProcessOutput(out, out)
-			process.getOutputStream().close()
-			process.waitFor()
-
-
-			sc = new Scanner(output)
-			println('-------pmrep validationoutput result----------------:')
-			lastLine = ""
-			while (sc.hasNextLine()) {
-				lastLine = sc.nextLine()
-			println(lastLine)
-			}
-			println('')
-		
-					
-		if (invalidObjects.exists() && invalidObjects.length() > 0){
-			
-			println "------------------------------------------------------------------------------"
-			println "---------------- invalid objects found in the repository.---------------------"
-			
-			def invalidlist = []
-			    invalidObjects.eachLine{line -> 				
-				invalidlist.add(line)			
-						
-			}
-					
-				for(line in invalidlist){
-					def splitArry = line.split(",")
-					def folderNameList = []
-					for(int i=2; i<splitArry.size()-2; i++){
-						folderNameList.add(splitArry[i])					
-							
-					}
-				
-						println("Folder:----" + splitArry[1])
-						println("InvalidObjects Found in:------" + folderNameList.join(","))
-						println("");
-						exitCode = 1
-						
-					}	
-					
-				} else if(execution != null){
-						 println('')
-						 println "--------------Migration fail failed to execute deployfolder.-----------"
-						 exitCode = 1
-			
-				} else {
-				
-						println('')
-						println "----------------No objects found in the repository.---------------------"
-	   
-				}			
-				
-			output.delete()
-			script.delete()
-				
-			} catch (Exception ex) {
-				println "--------[Error] Please review the output log and stack trace for information on the error.---------"
-				println ex.printStackTrace()
-				exitCode = 1
-				
-				} finally {
-			
-				System.exit(exitCode)	
-			}
-
 		} else {
-				println('')
-				println("-------------No invalid objects found in the repository.---------------")
-				println('')	
-				System.exit(exitCode)
-	} 
-
-
+			exitCode = process.exitValue()
+		}
+		
 

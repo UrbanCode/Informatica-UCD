@@ -875,4 +875,55 @@
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
   </step-type>
+   <step-type name="Validate Folder Migration">
+    <description>
+      Folder Migration. The step will validate folder migration in the target server.
+    </description>
+         <properties>
+        <property name="tarrepo" required="true">
+        <property-ui type="textBox" label="Target Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="tarhost">
+        <property-ui type="textBox" label="Target Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="tarport">
+        <property-ui type="textBox" label="Target Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
+      </property>
+      <property name="tarusername" required="true">
+        <property-ui type="textBox" label="Target Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="tarpassword" required="true">
+        <property-ui type="secureBox" label="Target Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
+      </property>
+       <property name="tardomain" required="true">
+        <property-ui type="textBox" label="Target Domain Name" description="The domain name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="tarsecurityDomain" required="true">
+        <property-ui type="textBox" label="Target Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native"/>
+      </property>
+      <property name="infaHome" required="true">
+        <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
+      </property>
+      <property name="tarfolder">
+        <property-ui type="textAreaBox" label="Validation Informatica Folder(s)" description="The target folder(s) for the deployment folder validation.Separate each folder with a comma or new line. If this property is blank, the source
+                    folder names will be used as the destination folder names. "/>
+      </property>
+      </properties>
+      
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.2.jar"/>
+      <arg file="validate_folder_migration.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
 </plugin>
