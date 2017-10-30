@@ -233,5 +233,8 @@ Issue #26 - Security Domain property added to Apply Label step.
   	<release-note plugin-version="26">
 Issue #28 - Property "Security Domain" missing on several steps.
   </release-note>
+    	<release-note plugin-version="27">
+Added "Folder Migration" step.
+  </release-note>
   </release-notes>
 </pluginInfo>

@@ -23,6 +23,7 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     Roll Back Deployment Group
     Run PMREP Command
     Validate Deployment Group
+	Folder Migration
 
 
 ### Compatibility
@@ -37,6 +38,8 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
 	a new distributable zip within the dist folder. Use this command if you wish to make
 	your own changes to the plugin.
 ### History
+
+    Version 27 - Added Folder Migration Step
     Version 25
         Issue #26 - Security Domain property added to Apply Label step.
     Version 24
