@@ -11,7 +11,7 @@
 -->
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="28" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="27" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -203,10 +203,7 @@
         <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group." hidden="true" />
       </property>
       <property name="copydeploymentgroup" required="false">
-        <property-ui type="checkBox" label="Copy Deployment Group" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." />
-      </property>
-      <property name="clearsrcdeploygroup" required="false">
-        <property-ui type="checkBox" label="CLEAR SRC DEPLOYGROUP" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." />
+        <property-ui type="checkBox" label="Copy Deployment Group" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." hidden="true" />
       </property>
     </properties>
     <post-processing><![CDATA[
@@ -929,7 +926,7 @@
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
   </step-type>
-    <step-type name="Deploy Multiple Deployment Groups">
+      <step-type name="Deploy Multiple Deployment Groups">
     <description>Deploy one or more deployment groups from one server to another.</description>
     <properties>
       <property name="repo" required="true">
@@ -1020,6 +1017,4 @@
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
   </step-type>
-
-  
 </plugin>

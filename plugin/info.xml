@@ -200,44 +200,44 @@ Updated build.xml and plugin folder structure.
  Added LANG property to step "Import Objects" to fix encodeing problem
  All default property references are now optional.
     </release-note>
-	<release-note plugin-version="18">
+    <release-note plugin-version="18">
 The following updates have been made to the Import Objects step:
 - Added a new line to prevent the Security Domain argument from bleeding into the following line.
 - Now able to specify files paths for the Folder Mapping, Repository Mapping, and Conflict Resolution Rules list properties.
     </release-note>
-	<release-note plugin-version="19">
+    <release-note plugin-version="19">
 Fixed import_object security domain lines seperation, while leaving space so that does not bleed into next variable or create new line in connection string.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="20">
 Fixed security vulnerability in import_objects.groovy: On exit, the generated script file will be deleted.
 Added Security Domain, LANG, and INFAHOME environment properties to the Validate Deployment Group step.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="21">
 Added INFA HOME property to the Create Dynamic Deployment Group step.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="22">
 The Roll Back Deployment Group Step properly uses the -t flag.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="23">
 Pull Request #23 - Import Objects step no longer adds Retain Generated Value and Checkin After Import parameters to control file if not selected.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="24">
 Issue #18 - Type property added to the Create Dynamic Deployment step.
 Issue #19 - INFA HOME property added to the Deploy Deployment Group step.
 INFA_HOME, LD_LIBRARY_PATH, and LIBPATH environment variables are set in the Create Deploy Deployment and Deploy Deployment Group steps.
 Removed extra execute command from the Validate Deployment step.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="25">
 Issue #26 - Security Domain property added to Apply Label step.
-  </release-note>
+    </release-note>
   	<release-note plugin-version="26">
 Issue #28 - Property "Security Domain" missing on several steps.
-  </release-note>
-  <release-note plugin-version="27">
-Added "Folder Migration" step.
-  </release-note>
-  <release-note plugin-version="28">
-Added "Deploy Multiple Deployment Groups" step. A number of deployment groups can be specified in an input file. 
-  </release-note>
+    </release-note>
+    <release-note plugin-version="27">
+Added Folder Migration and Validate Folder Migration steps.
+    </release-note>
+    <release-note plugin-version="28">
+Added "Deploy Multiple Deployment Groups" from a file
+    </release-note>	
   </release-notes>
 </pluginInfo>
