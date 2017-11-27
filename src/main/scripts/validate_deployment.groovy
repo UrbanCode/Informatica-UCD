@@ -1,5 +1,5 @@
 /**
- * © Copyright IBM Corporation 2015, 2017.
+ * (c) Copyright IBM Corporation 2017.
  * This is licensed under the following license.
  * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
  * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -87,32 +87,32 @@ procBuilder.directory
 
 def env = procBuilder.environment();
 if (infaHome != null && infaHome != "") {
-	env.put("INFA_HOME", infaHome);
+    env.put("INFA_HOME", infaHome);
 
-	if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
-		env.put("LD_LIBRARY_PATH", env.get("LD_LIBRARY_PATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
-	}
-	else {
-		env.put("LD_LIBRARY_PATH", infaHome + File.separator + "server" + File.separator + "bin");
-	}
+    if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
+        env.put("LD_LIBRARY_PATH", env.get("LD_LIBRARY_PATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+    }
+    else {
+        env.put("LD_LIBRARY_PATH", infaHome + File.separator + "server" + File.separator + "bin");
+    }
 
-	if (env.get("LIBPATH") != null && env.get("LIBPATH") != "") {
-		env.put("LIBPATH", env.get("LIBPATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
-	}
-	else {
-		env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
-	}
+    if (env.get("LIBPATH") != null && env.get("LIBPATH") != "") {
+        env.put("LIBPATH", env.get("LIBPATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+    }
+    else {
+        env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
+    }
 }
 
 if (lang != null && lang != "") {
-	env.put("LANG", lang);
+    env.put("LANG", lang);
 }
 
-	println("With extra  Environment : ");
-	println("INFA_HOME : " + env.get("INFA_HOME"));
-	println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
-	println("LIBPATH : " + env.get("LIBPATH"));
-	println("LANG : " + env.get("LANG"));
+println("With extra  Environment : ");
+println("INFA_HOME : " + env.get("INFA_HOME"));
+println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
+println("LIBPATH : " + env.get("LIBPATH"));
+println("LANG : " + env.get("LANG"));
 
 def process = procBuilder.start();
 process.consumeProcessOutput(out, out)
@@ -151,10 +151,10 @@ if (queryOutputFile.exists() && queryOutputFile.length() > 0) {
     println('')
     script << "connect -r $repo -n $username -x $password "
 
-	if (securityDomain){
+    if (securityDomain){
         script << "-s ${securityDomain} "
     }
-	if (domain) {
+    if (domain) {
         script << "-d $domain $LS"
     }
     else {
