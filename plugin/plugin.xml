@@ -11,7 +11,7 @@
 -->
 <plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier version="27" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
+    <identifier version="28" id="com.urbancode.air.plugin.Informatica" name="Informatica"/>
     <description>
     The Informatica plugin is an automation based plugin. It is executed as part of the deployment to migrate Informatica configuration and run scripts against the Informatica server and for creating and deploying deploying groups.
     </description>
@@ -203,7 +203,10 @@
         <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group." hidden="true" />
       </property>
       <property name="copydeploymentgroup" required="false">
-        <property-ui type="checkBox" label="Copy Deployment Group" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." hidden="true" />
+        <property-ui type="checkBox" label="Copy Deployment Group" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." />
+      </property>
+      <property name="clearsrcdeploygroup" required="false">
+        <property-ui type="checkBox" label="CLEAR SRC DEPLOYGROUP" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." />
       </property>
     </properties>
     <post-processing><![CDATA[
@@ -300,7 +303,7 @@
       <property name="securityDomain">
         <property-ui type="textBox" label="Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native"/>
       </property>
-	  <property name="infaHome">
+      <property name="infaHome">
         <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
       </property>
       <property name="lang">
@@ -858,7 +861,7 @@
                     folder names will be used as the destination folder names. "/>
       </property>
       </properties>
-      
+
     <post-processing><![CDATA[
         if (properties.get("exitCode") != 0) {
             properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
@@ -877,7 +880,7 @@
   </step-type>
    <step-type name="Validate Folder Migration">
     <description>
-      Folder Migration. The step will validate folder migration in the target server.
+      Validate Folder Migration. The step will validate folder migration in the target server.
     </description>
          <properties>
         <property name="tarrepo" required="true">
@@ -909,7 +912,7 @@
                     folder names will be used as the destination folder names. "/>
       </property>
       </properties>
-      
+
     <post-processing><![CDATA[
         if (properties.get("exitCode") != 0) {
             properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
@@ -926,4 +929,97 @@
       <arg file="${PLUGIN_OUTPUT_PROPS}"/>
     </command>
   </step-type>
+    <step-type name="Deploy Multiple Deployment Groups">
+    <description>Deploy one or more deployment groups from one server to another.</description>
+    <properties>
+      <property name="repo" required="true">
+        <property-ui type="textBox" label="Repository" description="The repository name in Informatica." default-value="${p:resource/informatica/repo}"/>
+      </property>
+      <property name="tardomain">
+        <property-ui type="textBox" label="Target Domain Name" description="The domain name of the Informatica server for the target server." default-value="${p:resource/informatica/tardomain}"/>
+	  </property>
+      <property name="host">
+        <property-ui type="textBox" label="Host" description="The host name of the Informatica server." default-value="${p?:resource/informatica/domain}"/>
+      </property>
+      <property name="port">
+        <property-ui type="textBox" label="Port" description="The port number of the Informatica server." default-value="${p?:resource/informatica/port}"/>
+      </property>
+      <property name="username" required="true">
+        <property-ui type="textBox" label="Username" description="The username to use to authenticate with Informatica." default-value="${p:resource/informatica/username}"/>
+      </property>
+      <property name="password">
+        <property-ui type="secureBox" label="Password" description="The password to use to authenticate with Informatica." default-value="${p?:resource/informatica/password}"/>
+      </property>
+      <property name="passwordscript">
+        <property-ui type="textBox" label="Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here." default-value="${p?:resource/informatica/passscript}"/>
+      </property>
+      <property name="tarsecurityDomain" required="false">
+        <property-ui type="textBox" label="Target Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native." default-value="${p:resource/informatica/tarsecurityDomain}"/>
+	  </property>
+      <property name="infaHome">
+        <property-ui type="textBox" label="INFA HOME" description="The INFA_HOME variable to be set on the environment. If set we will also use ${INFA_HOME}/server/bin/pmrep as the exe and add this to LD_LIBRARY_PATH and LIBPATH"/>
+      </property>
+      <property name="srcrepo" required="true">
+        <property-ui type="textBox" label="Source Repository" description="The repository name in Informatica for the source server." default-value="${p:resource/informatica/srcrepo}"/>
+      </property>
+      <property name="srcdomain">
+        <property-ui type="textBox" label="Source Domain Name" description="The domain name of the Informatica server for the source server." default-value="${p:resource/informatica/srcdomain}"/>
+      </property>
+      <property name="srchost">
+        <property-ui type="textBox" label="Source Host" description="The host name of the Informatica server for the source server." default-value="${p:resource/informatica/srchost}"/>
+      </property>
+      <property name="srcport">
+        <property-ui type="textBox" label="Source Port" description="The port number of the Informatica server for the source server." default-value="${p:resource/informatica/srcport}"/>
+      </property>
+      <property name="srcsecurityDomain" required="false">
+        <property-ui type="textBox" label="Source Security Domain" description="Required if you use LDAP authentication. Name of the security domain that the user or group belongs to. Default is Native." default-value="${p:resource/informatica/srcsecurityDomain}"/>
+      </property>
+      <property name="srcusername" required="true">
+        <property-ui type="textBox" label="Source Username" description="The username to use to authenticate with Informatica for the source server." default-value="${p:resource/informatica/srcusername}"/>
+      </property>
+      <property name="srcpassword">
+        <property-ui type="secureBox" label="Source Password" description="The password to use to authenticate with Informatica for the source server." default-value="${p:resource/informatica/srcpassword}"/>
+      </property>
+      <property name="srcpasswordscript">
+        <property-ui type="textBox" label="Source Password Script" description="If a property or script should be used to retrieve the password, leave it blank and put the property or script here for the source server." default-value="${p:resource/informatica/srcpassscript}"/>
+      </property>
+      <property name="groupname" required="false">
+        <property-ui type="textBox" label="Informatica Group" description="The name of the deployment group to deploy."/>
+      </property>
+      <property name="groupnameInputFile" required="false">
+        <property-ui type="textBox" label="Informatica Group Input File" description="An input file containing multiple Deployment Groups separated by new line character."/>
+      </property>	  
+      <property name="folder" >
+        <property-ui type="textAreaBox" label="Source Informatica Folder(s)" description="The source folder(s) of the deployment group objects. Separate each folder with a comma or new line."/>
+      </property>
+      <property name="folderDest">
+        <property-ui type="textAreaBox" label="Destination Informatica Folder(s)" description="The destination folder(s) for the deployment group objects.
+                    This is a 1:1 mapping with 'Source Informatica Folder(S)'. Separate each folder with a comma or new line. If this property is blank, the source
+                    folder names will be used as the destination folder names. "/>
+      </property>
+      <property name="label" required="false">
+        <property-ui type="textBox" label="Informatica Label" description="The name of the label used to populate the dynamic deployment group if deploying a dynamic deployment group." hidden="true" />
+      </property>
+      <property name="copydeploymentgroup" required="false">
+        <property-ui type="checkBox" label="Copy Deployment Group" description="Control Parameter: Select to copy the deployment group with its objects (in the deployment group) to the target repository." hidden="true" />
+      </property>
+    </properties>
+    <post-processing><![CDATA[
+        if (properties.get("exitCode") != 0) {
+            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+        }
+        else {
+            properties.put("Status", "Success");
+        }
+     ]]></post-processing>
+    <command program="${GROOVY_HOME}/bin/groovy">
+      <arg value="-cp"/>
+      <arg path="classes:lib/groovy-plugin-utils-1.2.jar"/>
+      <arg file="informatica_deploy_multi_deployment_groups.groovy"/>
+      <arg file="${PLUGIN_INPUT_PROPS}"/>
+      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+    </command>
+  </step-type>
+
+  
 </plugin>
