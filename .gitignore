@@ -18,3 +18,4 @@ plugin/info.xml
 plugin/info.xml
 plugin/plugin.xml
 src/main/scripts/validate_deployment.groovy
+plugin/info.xml
