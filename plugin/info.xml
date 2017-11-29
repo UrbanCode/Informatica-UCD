@@ -236,8 +236,7 @@ Issue #28 - Property "Security Domain" missing on several steps.
     <release-note plugin-version="27">
 Added Folder Migration and Validate Folder Migration steps.
     </release-note>
-  </release-notes>
-      <release-note plugin-version="28">
+    <release-note plugin-version="28">
 Added a new step - "Deploy Multiple Deployment Groups"
     </release-note>
   </release-notes>

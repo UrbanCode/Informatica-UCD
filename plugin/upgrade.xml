@@ -248,4 +248,8 @@
   </migrate>
    <migrate to-version="27">
   </migrate>
+  <migrate to-version="28">
+      <migrate-command name="Deploy Multiple Deployment Groups">
+      </migrate-command>
+  </migrate>
 </plugin-upgrade>
