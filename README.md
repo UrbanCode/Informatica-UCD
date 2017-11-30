@@ -19,6 +19,7 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     Create Folder
     Create Static Deployment Group
     Deploy Deployment Group
+    Deploy Multiple Deployment Groups
     Folder Migration
     Import Objects
     Roll Back Deployment Group
@@ -42,9 +43,10 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     your own changes to the plugin.
 
 ### History
-
+    Vesrion 28
+        PR #34 - Added Deploy Multiple Deployment Groups step.
     Version 27
-        Added Folder Migration and Validate Folder Migration Steps
+        PR #32 - Added Folder Migration and Validate Folder Migration Steps.
     Version 26
         Issue #28 - Property "Security Domain" missing on several steps.
     Version 25
