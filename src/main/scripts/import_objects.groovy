@@ -45,8 +45,7 @@ final def conflictResolutionDefault = stepProps['conflictResolutionDefault'];
 final def retainGenSeq = Boolean.valueOf(stepProps['retainGenSeq']);
 final def checkinAfterImport = Boolean.valueOf(stepProps['checkinAfterImport']);
 
-final def inputFile = 'informatica_script.' + unique + '.in'
-final def outputFile = 'informatica_script.' + unique + '.out'
+final def inputFile = 'informatica_script.' + unique + '.sh'
 final def controlFile = 'informatica_script.' + unique + '.ctl'
 
 final def conflictRuleSet = [
@@ -112,9 +111,21 @@ else {
         fileSet << [(newXmlFile) : "${oldFileName}.xml"]
     }
 
-    // generate Informatica script
+    // generate Bash script with pmrep Informatica commands
     def script = new File(workDir, inputFile)
-	script.deleteOnExit()
+    script.deleteOnExit()
+
+    script << "#!/bin/bash $LS";
+
+    script.setExecutable(true);
+
+    if (infaHome != null && infaHome != "") {
+            script << infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep ";
+    }
+    else {
+            script << 'pmrep ';
+    }
+
     script << "connect -r $repo -n $username -x $password "
 
     if (securityDomain){
@@ -129,11 +140,16 @@ else {
     }
 
     fileSet.keySet().each {
+        if (infaHome != null && infaHome != "") {
+            script << infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep ";
+        }
+        else {
+            script << 'pmrep ';
+        }
         def filePrefix = it.name.substring(0, it.name.indexOf(".xml"))
         script << "ObjectImport -i \"$it\" -c \"${filePrefix}.ctl\" $LS"
     }
 
-    script << "exit"
     println('script content:')
     script.eachLine { line -> println(line) }
     println('')
@@ -251,19 +267,7 @@ else {
 
     //run the Informatica command
     def command = []
-    if (infaHome != null && infaHome != "") {
-        command.add(infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep");
-    }
-    else {
-        command.add('pmrep')
-    }
-    command.add('run')
-    command.add('-o')
-    command.add(outputFile)
-    command.add('-f')
     command.add(inputFile)
-    command.add('-e')
-    command.add('-s')
 
     println('command:')
     println(command.join(' '))
@@ -307,19 +311,6 @@ else {
         process.consumeProcessOutput(out, out)
         process.getOutputStream().close() // close stdin
         process.waitFor()
-
-        def output = new File(workDir, outputFile)
-        Scanner sc = new Scanner(output)
-        println('pmrep output:')
-        def lastLine = ""
-        while (sc.hasNextLine()) {
-            lastLine = sc.nextLine()
-            println(lastLine)
-        }
-        println('')
-        sc.close()
-
-        output.delete()
 
         if (!lastLine || !lastLine.trim().equalsIgnoreCase("exit")) {
             exitCode = 1
