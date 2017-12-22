@@ -312,12 +312,7 @@ else {
         process.getOutputStream().close() // close stdin
         process.waitFor()
 
-        if (!lastLine || !lastLine.trim().equalsIgnoreCase("exit")) {
-            exitCode = 1
-        }
-        else {
-            exitCode = process.exitValue()
-        }
+        exitCode = process.exitValue();
     }
     catch (Exception ex) {
         println "[Error] Please review the output log and stack trace for information on the error."
