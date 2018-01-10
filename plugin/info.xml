@@ -2,7 +2,7 @@
 <!--
 
  /**
-  * © Copyright IBM Corporation 2015, 2017.
+  * © Copyright IBM Corporation 2015, 2018.
   * This is licensed under the following license.
   * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
   * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -240,7 +240,7 @@ Added Folder Migration and Validate Folder Migration steps.
 Added a new step - "Deploy Multiple Deployment Groups"
     </release-note>
     <release-note plugin-version="29">
-Modified import_objects.groovy to run pmrep commands one at a time in a bash script, instead of passing pmrep a command file.
+The Import Objects step now runs commands one at a time in a bash script. This solves an issue around running large pmrep command files.
     </release-note>
   </release-notes>
 </pluginInfo>

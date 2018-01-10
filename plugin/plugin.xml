@@ -2,7 +2,7 @@
 <!--
 
  /**
-  * © Copyright IBM Corporation 2015, 2017.
+  * © Copyright IBM Corporation 2015, 2018.
   * This is licensed under the following license.
   * The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
   * U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
@@ -985,7 +985,7 @@
       </property>
       <property name="groupnameInputFile" required="false">
         <property-ui type="textBox" label="Informatica Group Input File" description="An input file containing multiple Deployment Groups separated by new line character."/>
-      </property>	  
+      </property>
       <property name="folder" >
         <property-ui type="textAreaBox" label="Source Informatica Folder(s)" description="The source folder(s) of the deployment group objects. Separate each folder with a comma or new line."/>
       </property>
