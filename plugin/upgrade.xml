@@ -252,4 +252,6 @@
       <migrate-command name="Deploy Multiple Deployment Groups">
       </migrate-command>
   </migrate>
+  <migrate to-version="29">
+  </migrate>
 </plugin-upgrade>

@@ -239,5 +239,8 @@ Added Folder Migration and Validate Folder Migration steps.
     <release-note plugin-version="28">
 Added a new step - "Deploy Multiple Deployment Groups"
     </release-note>
+    <release-note plugin-version="29">
+Modified import_objects.groovy to run pmrep commands one at a time in a bash script, instead of passing pmrep a command file.
+    </release-note>
   </release-notes>
 </pluginInfo>
