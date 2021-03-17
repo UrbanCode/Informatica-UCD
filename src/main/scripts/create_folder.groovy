@@ -98,7 +98,8 @@ println('command:')
 println(command.join(' '))
 println('')
 
-def lastLine = ""def exitCode = 0
+def lastLine = ""
+def exitCode = 0
 def procBuilder = new ProcessBuilder(command as String[])
 procBuilder.directory
 
