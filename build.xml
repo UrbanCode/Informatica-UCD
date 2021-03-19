@@ -166,6 +166,7 @@
             <ivy:retrieve conf="default" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]"/>
             <ivy:retrieve conf="build" pattern="${lib.dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]"/>
             <ivy:retrieve conf="test" pattern="${lib.dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]"/>
+            <ivy:cachepath pathid="test.path" conf="test"/>
         </target>
 
         <!-- =================================================== -->
@@ -201,7 +202,11 @@
 
             <mkdir dir="${releases.report.dir}"/>
             <junit printsummary="yes" haltonfailure="no" showoutput="false" failureproperty="tests.failed">
-
+                <classpath>
+                    <path refid="test.path"/>
+                    <pathelement path="${classes.dir}"/>
+                    <pathelement path="${test.classes.dir}"/>
+                </classpath>
                 <classpath refid="classpath.test" />
                 <classpath location="${lib.test.dir}" />
 
