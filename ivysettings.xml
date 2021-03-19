@@ -5,8 +5,8 @@
         <ibiblio name="central" m2compatible="true"/>
 
         <chain name="default">
-            <resolver ref="central"/>
             <resolver ref="my-maven"/>
+            <!--<resolver ref="central"/>-->
         </chain>
     </resolvers>
 </ivysettings>
