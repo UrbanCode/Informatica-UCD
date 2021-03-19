@@ -32,6 +32,8 @@
         <property name="lib.build.gputil.sources.dir" value="${lib.build.gputil.dir}/sources" />
         <property name="lib.build.gputil.classes.dir" value="${lib.build.gputil.dir}/classes" />
         <property name="lib.test.dir"           value="${lib.dir}/test" />
+        <property name="lib.test.java.dir"      value="${lib.test.dir}/java" />
+        <property name="lib.test.dir"           value="${lib.dir}/test" />
         <property name="releases.dir"           value="${basedir}/releases" />
         <property name="releases.report.dir"    value="${releases.dir}/report" />
 
@@ -166,7 +168,6 @@
             <ivy:retrieve conf="default" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]"/>
             <ivy:retrieve conf="build" pattern="${lib.dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]"/>
             <ivy:retrieve conf="test" pattern="${lib.dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]"/>
-            <ivy:cachepath pathid="test.path" conf="test"/>
         </target>
 
         <!-- =================================================== -->
@@ -202,13 +203,9 @@
 
             <mkdir dir="${releases.report.dir}"/>
             <junit printsummary="yes" haltonfailure="no" showoutput="false" failureproperty="tests.failed">
-                <classpath>
-                    <path refid="test.path"/>
-                    <pathelement path="${classes.dir}"/>
-                    <pathelement path="${test.classes.dir}"/>
-                </classpath>
+
                 <classpath refid="classpath.test" />
-                <classpath location="${lib.test.dir}" />
+                <classpath location="${lib.test.java.dir}" />
 
                 <formatter type="xml" />
                 <formatter type="plain" />
@@ -261,8 +258,8 @@
 
         <!-- Java Tests -->
         <target name="compile-tests" description="Compile Java Test Files..." depends="compile-classes">
-            <mkdir dir="${lib.test.dir}"/>
-            <javac srcdir="${src.test.java.dir}" destdir="${lib.test.dir}" includeantruntime="false">
+            <mkdir dir="${lib.test.java.dir}"/>
+            <javac srcdir="${src.test.java.dir}" destdir="${lib.test.java.dir}" includeantruntime="false">
                 <classpath refid="classpath.test"/>
             </javac>
         </target>
