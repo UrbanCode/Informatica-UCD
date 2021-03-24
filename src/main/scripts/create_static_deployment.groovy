@@ -31,6 +31,7 @@ final def securityDomain = stepProps['securityDomain']
 final def host      = stepProps['host']
 final def port      = stepProps['port']
 final def workflows = stepProps['workflows']
+final def infaHome  = stepProps['infaHome']
 
 final def inputFile = 'informatica_script.' + unique + '.in'
 final def outputFile = 'informatica_script.' + unique + '.out'
@@ -86,7 +87,13 @@ script.eachLine { line -> println(line) }
 println('')
 
 def command = []
-command.add('pmrep')
+
+if (infaHome != null && infaHome != "") {
+    command.add(infaHome + File.separator + "server" + File.separator + "bin" + File.separator + "pmrep");
+}
+else {
+    command.add('pmrep')
+}
 command.add('run')
 command.add('-o')
 command.add(outputFile)
@@ -100,7 +107,36 @@ println(command.join(' '))
 println('')
 
 def lastLine = ""
-def process = command.execute()
+
+def exitCode = 0
+def procBuilder = new ProcessBuilder(command as String[])
+procBuilder.directory
+
+def env = procBuilder.environment();
+if (infaHome != null && infaHome != "") {
+	env.put("INFA_HOME", infaHome);
+
+	if (env.get("LD_LIBRARY_PATH") != null && env.get("LD_LIBRARY_PATH") != "") {
+		env.put("LD_LIBRARY_PATH", env.get("LD_LIBRARY_PATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+	}
+	else {
+		env.put("LD_LIBRARY_PATH", infaHome + File.separator + "server" + File.separator + "bin");
+	}
+
+	if (env.get("LIBPATH") != null && env.get("LIBPATH") != "") {
+		env.put("LIBPATH", env.get("LIBPATH") + File.pathSeparator + infaHome + File.separator + "server" + File.separator + "bin");
+	}
+	else {
+		env.put("LIBPATH", infaHome + File.separator + "server" + File.separator + "bin");
+	}
+}
+
+println("With extra  Environment : ");
+println("INFA_HOME : " + env.get("INFA_HOME"));
+println("LD_LIBRARY_PATH : " + env.get("LD_LIBRARY_PATH"));
+println("LIBPATH : " + env.get("LIBPATH"));
+
+def process = procBuilder.start();
 process.consumeProcessOutput(out, out)
 process.getOutputStream().close() // close stdin
 process.waitFor()

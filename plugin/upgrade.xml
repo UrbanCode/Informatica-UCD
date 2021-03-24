@@ -254,4 +254,16 @@
   </migrate>
   <migrate to-version="29">
   </migrate>
+  <migrate to-version="30">
+      <migrate-command name="Create Folder">
+          <migrate-properties>
+              <migrate-property name="infaHome" default=""/>
+          </migrate-properties>
+      </migrate-command>
+      <migrate-command name="Create Static Deployment Group">
+          <migrate-properties>
+              <migrate-property name="infaHome" default=""/>
+          </migrate-properties>
+      </migrate-command>
+  </migrate>
 </plugin-upgrade>

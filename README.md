@@ -43,6 +43,8 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     your own changes to the plugin.
 
 ### History
+    Vesrion 30
+        Added INFA HOME property to the "Create Folder" and "Create Static Deployment" steps.
     Vesrion 29
         PR #37 - The Import Objects step runs commands one at a time in a bash script. This solves an issue around running large pmrep command files.
     Vesrion 28
