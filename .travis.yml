@@ -24,4 +24,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    repo: IBM-UrbanCode/Informatica-UCD
+    repo: UrbanCode/Informatica-UCD
