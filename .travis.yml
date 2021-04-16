@@ -18,8 +18,7 @@ notifications:
 deploy:
   provider: releases
   api_key:
-    secure: KcBpkFaes74KGMm8X/rRA8e13+t3PmkefsAvOAR+iF4g1GyuLSPkP92Fb9vFfsXBph+qmFh5rNa2lIRf/3RXW6COxY7CMMaARxUfJOKE0rmIwF0qfKI+RZDh6abg92iYngunMZVN8WVft6Lv9ZTOYCWxr1Zs1Ll/Rl4PfvHNd1g=
-  file_glob: true
+    secure: eMrIONz4ebkuL6/pUfOFWsc6f394+GdY9qNoSBK55tCiFN4T+1dwdzd5EwBTFCZpD64j2+VGcr/lLtBzPmXc2nSK9sLvRdxvwxtTVZVGl7Z/QbTEJ68MFegJoJYRrTdnnMa0s/78TGfZZ4uoxr8KrYGtaRBRsz9yynN32xHeUy2JBTHpZbeKpFoN8dXc0j0Lf26khhkd1iYM3ca+YSkU875DrEfTI3y+HOXcfNgN715PawM4w5QUI5QBX5TwyQ/sy6GytgVLwCZYAf6Jlb/W2z4cVSLXSBfoM66PK0ffsGbXpLLfxTmK/ZVxdsc6+SoRd7viOYj+/hC5ttTcy/GAxdVKWBSp//qqwCBaL4cVE40z32I3HhLwqSCeutBWVTyqD9IL6xIddc3ERPGty189mXo2hIj9v+PJe8LfWzz3ZHGxCL0rqNrE9atv9gR+6j7xKkqSV0nEURupmS/ypRlyfPWY4/pMstnLEeTcthuiFvIhgNSZNR7nwNVzIWqAuCXTM6Aolui2vxUW0ls7t0xy+FXpYr1ev/eUnQQdwwkR5T3GR018fnN1X87MlW1eYaNK6wsbjT+o6soHmH6eLvU1H+JnPpcNeec5G5T/PFTLnIeJBPiKbG2iOpcaZ623MhbeamU849v/WlpZUSlawQrwowJpYMy052sXr+BcspExEEs=  file_glob: true
   file: releases/*.zip
   skip_cleanup: true
   on:
