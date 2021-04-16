@@ -24,8 +24,3 @@ deploy:
   on:
     tags: true
     repo: UrbanCode/Informatica-UCD
-    
-    
-    
-    
-    
