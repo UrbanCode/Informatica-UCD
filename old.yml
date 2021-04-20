@@ -25,6 +25,3 @@ deploy:
   on:
     tags: true
     repo: UrbanCode/Informatica-UCD
-env:
-  global:
-    secure: gqNFrJna+R+oPN1Wkw3SAXxG64WXR0NeMJX+bYy8t+m2yR0liOeLw0FYp4dEBGvtK+v5NqljacrRWazhqUXndqauphDquPvQDLw9fUzQkqGl20rMPXCypes14NKcsOCBVM4ezP8s0vw+fS/q7MdTAsIn3VbwDIWAu+/uLY+TPONUKCqTKgrxRcGtQgRZ4ZMfVX1dIq8O0wmLXpJQMIBiqwF57cpLChPxHOzUsCEJdtjDArNix5OMd5LAtQPMKO8pvkepTh84yPpeOHu2eC1MhyWFgiN8+C17hmCebkaUiXRFTmlg9H4cbebmY0U1gv5Lr5LeSbK2sBKf6AgRlPZcTcrcIePFriE1OJIV2pt2NcVFIvARyTgQ1YE2VOZ1G4/6HM96137WThQofpgj4Amr3LRBMUgptBYXNQ2ex35axCKtr+mxaY4bDsW5cEhoUPfzcUjxLKeBgtRFz7xgVJdG+GFqT02XuHkSfGxjrYo/P5Uvchl3uDiIbXQmlC0wYXqHchEIIbiYiEWgXMKEHXDrD2yN1eMPx05RP7YDRJcm+pMfPCgvpaoERar/IqGvaHx+wE/eONzmN336+PuOxG6s4K8ojXT9+b8t9LpHSwA5yKnlgCY72+/iCmZh620c4rQg+S1aYi/gLJO46mV7d/SmkDw6nmkfvNPmm8s/InQI6Jo=
