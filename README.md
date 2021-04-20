@@ -1,8 +1,11 @@
 # IBM UrbanCode Deploy Informatica Plugin [![Build Status](https://travis-ci.org/IBM-UrbanCode/Informatica-UCD.svg?branch=master)](https://travis-ci.org/IBM-UrbanCode/Informatica-UCD)
+
 ---
+
 Note: This is not the plugin distributable! This is the source code. To find the installable plugin, go into the 'Releases' tab, and download a stable version.
 
 ### License
+
 This plugin is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
 
 ### Overview
@@ -27,7 +30,6 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     Validate Deployment Group
     Validate Folder Migration
 
-
 ### Compatibility
 
     The IBM UrbanCode Deploy automation plug-in works with Informatica Version 9.6 and later.
@@ -43,6 +45,7 @@ The UCD Informatica Plugin is an automation plugin that connects to specific rep
     your own changes to the plugin.
 
 ### History
+
     Vesrion 30
         Added INFA HOME property to the "Create Folder" and "Create Static Deployment" steps.
     Vesrion 29
