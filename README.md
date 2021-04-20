@@ -6,7 +6,7 @@ Note: This is not the plugin distributable! This is the source code. To find the
 
 ### License
 
-This plugin is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
+This plugin is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html).
 
 ### Overview
 
